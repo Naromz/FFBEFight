@@ -1,0 +1,51 @@
+Effects: 
+  - type: heal
+    group: boosts
+
+
+  - type: dmg
+    group: action
+  - type: whitemagic
+    group: action
+  - type: blackmagic
+    group: action
+  - type: heal
+    group: action
+  - type: defbreak
+    group: ailments
+  - type: atkbreak
+    group: ailments
+  - type: sprbreak
+    group: ailments
+  - type: magbreak
+    group: ailments
+  - type: waterbreak
+    group: ailments
+  - type: windbreak
+    group: ailments
+  - type: lightningbreak
+    group: ailments
+  - type: firebreak
+    group: ailments
+  - type: icebreak
+    group: ailments
+  - type: earthbreak
+    group: ailments
+  - type: lightbreak
+    group: ailments
+  - type: darkbreak
+    group: ailments
+  - type: silence
+    group: ailments
+  - type: blind
+    group: ailments
+  - type: paralyze
+    group: ailments
+  - type: confuse
+    group: ailments
+  - type: stone
+    group: ailments
+  - type: disease
+    group: ailments
+  - type: poison
+    group: ailments
