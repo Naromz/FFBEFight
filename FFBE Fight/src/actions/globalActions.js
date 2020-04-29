@@ -9,13 +9,17 @@ export const GlobalActions = {
     LOADEFFECTS: { START: 'LOADEFFECTSSTART', SUCCESS: 'LOADEFFECTSGOOD', FAIL: 'LOADEFFECTSGOOD' },
     SELECT_UNIT: 'SELECT_UNIT',
     MODIFY_TURN_MOVES: 'MODIFY_TURN_MOVES',
-
     CHANGE_BOSS: 'CHANGE_BOSS',
     CHANGE_MOB: 'CHANGE_MOB',
     CHANGE_HP: 'CHANGE_HP',
     SEL_UNIT_PLACE: 'SEL_UNIT_PLACE',
+    ADD_ACTIONS: 'ADD_ACTIONS'
 
 };
+export const addActionToState = (val, spot, side) => ({
+    type: GlobalActions.ADD_ACTIONS,
+    payload: { data: val, spot: spot, side: side }
+})
 export const selectUnit = (UnitData, Position) => ({
     type: GlobalActions.SELECT_UNIT,
     payload: { unitData: UnitData, selected: Position }
@@ -43,7 +47,7 @@ export const sagaStart = () => ({
 })
 export const modifyCurTurn = (spot, data) => ({
     type: GlobalActions.MODIFY_TURN_MOVES,
-    payload: { spot: spot, data: data }
+    payload: { spot: spot, data: [data] }
 })
 export const loadEffectStart = (effectArr) => ({
     type: GlobalActions.LOADEFFECTS.START,

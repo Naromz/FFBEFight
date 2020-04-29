@@ -30,6 +30,7 @@ class Main extends Component {
                         </Route>
                         <Route exact path="/">
                             <Fight />
+                            {/* <h1>test</h1> */}
                         </Route>
                         <Route path="/units">
                             <h1>units</h1>

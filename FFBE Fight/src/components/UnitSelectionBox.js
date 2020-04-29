@@ -222,7 +222,6 @@ function findUnitData(data, pos) {
 
 function CheckUnitData(data, pos) {
   let notFound = false;
-  console.log(data);
   for (let i = 0; i < data.length; i++) {
     if (data[i].selected == pos) {
       notFound = true;

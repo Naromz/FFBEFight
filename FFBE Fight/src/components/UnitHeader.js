@@ -103,7 +103,21 @@ function findUnitData(data, pos) {
   return found;
 }
 
-
+function findUnitMoves(data, pos) {
+  console.log(data);
+  let found;
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].spot == pos) {
+      if (data[i].data.length == 1) {
+        found = data[i].data[0].name;
+      }
+      else {
+        found = data[i].data.map((val) => { return val.name + "  : " });
+      }
+    }
+  }
+  return found;
+}
 function GetUnitMoves({ unitData, setMoveData, }) {
 
 
@@ -119,7 +133,6 @@ function GetUnitMoves({ unitData, setMoveData, }) {
 
 function App(props) {
 
-  var [curMoveData, setCurMoveData] = useState('');
   var [multicast, setMulticast] = useState(false);
 
   useEffect(() => {
@@ -129,14 +142,14 @@ function App(props) {
     <UnitData>
       <UnitImageCont>{findUnitData(props.unitData, props.selUnit) && <img src={require(`../resources/images/Units/${findUnitData(props.unitData, props.selUnit).fullimg}.png`)}></img>} </UnitImageCont>
       <UnitStuffCont>
-        <FullRow onClick={() => console.log(findUnitData(props.unitData, props.selUnit))}><NameBox>{findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).name}</NameBox>
+        <FullRow ><NameBox>{findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).name}</NameBox>
           <StatBox>HP {findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).stats[0].maxStats.hp}</StatBox>
           <StatBox>ATK {findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).stats[0].maxStats.atk}</StatBox>
           <StatBox>DEF {findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).stats[0].maxStats.def}</StatBox>
           <StatBox>SPR {findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).stats[0].maxStats.spr}</StatBox>
           <StatBox>MAG {findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).stats[0].maxStats.mag}</StatBox>
         </FullRow>
-        <MovesCont>{curMoveData} </MovesCont>
+        <MovesCont>{findUnitMoves(props.curTurn, props.selUnit) && findUnitMoves(props.curTurn, props.selUnit)} </MovesCont>
         <MovesCont>{findUnitData(props.unitData, props.selUnit) && <GetUnitMoves setMoveData={(val) => props.modifyCurTurn(props.selUnit, val)} unitData={findUnitData(props.unitData, props.selUnit).moves} />}</MovesCont>
       </UnitStuffCont>
     </UnitData>

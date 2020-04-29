@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { alertMessage, sagaStart, modifyCurTurn } from '../actions/globalActions'
 import styled from 'styled-components'
-
+import shortid from 'shortid'
 
 
 var Space = styled.div`
@@ -64,7 +64,7 @@ function CalcTurnData(data, turnnum) {
           }
 
         }
-        moveData.push(<p>Turn Condition: {(curMoveData)}</p>)
+        moveData.push(<p key={shortid.generate()}>Turn Condition: {(curMoveData)}</p>)
       }
     });
     // return data.cond.map((val, idx) => {

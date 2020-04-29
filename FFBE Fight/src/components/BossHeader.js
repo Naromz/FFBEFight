@@ -88,7 +88,7 @@ justify-content:center;
 align-items:center;
 `
 var BossMoveInfoCont = styled.div`
-width:600px;
+width:580px;
 height:18px;
 font-size:14px;
 outline:1px solid black;

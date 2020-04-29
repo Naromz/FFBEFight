@@ -1,11 +1,11 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { delay, call, put, takeLatest } from 'redux-saga/effects'
 import { GlobalActions } from '../actions/globalActions';
 import Axios from 'axios';
 
 
 function* bossSaga(action) {
     try {
-        const response = yield call(Axios.post, `http://192.168.1.72:3005/getbosses`);
+        const response = yield call(Axios.post, `http://codinghaze.com:3005/getbosses`);
 
         yield put({
             type: GlobalActions.LOADBOSSES.SUCCESS,
@@ -23,7 +23,7 @@ function* bossSaga(action) {
 }
 function* unitSaga(action) {
     try {
-        const response = yield call(Axios.post, `http://192.168.1.72:3005/getunits`);
+        const response = yield call(Axios.post, `http://codinghaze.com:3005/getunits`);
 
         yield put({
             type: GlobalActions.LOADUNITS.SUCCESS,

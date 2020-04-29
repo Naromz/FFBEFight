@@ -1,8 +1,34 @@
-
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components'
 import { changeActiveBoss, changeActiveMob } from '../actions/globalActions';
+
+var NextButtonCont = styled.div`
+flex:1;
+height:64px;
+outline:1px solid black;
+text-align:center;
+background-color:white;
+display:flex;
+flex-wrap:wrap;
+flex-direction:row;
+justify-content:center;
+align-items:center;
+`
+var NextButton = styled.div`
+width:80px;
+height:32px;
+border:1px solid black;
+text-align:center;
+background-color:lightgray;
+vertical-align:middle;
+border-radius:2px;
+display:flex;
+flex-wrap:wrap;
+flex-direction:row;
+justify-content:center;
+align-items:center;
+`
 
 var BossHeader = styled.div`
 width:800px;
@@ -68,6 +94,7 @@ function App(props) {
 
       </BossSelection>
       {props.waveData && <CreateEnemies changeactiveMob={(val) => props.changeActiveMob(val)} enemies={props.waveData?.mobs} />}
+      <NextButtonCont><NextButton>Next Turn</NextButton></NextButtonCont>
     </BossHeader >
 
   );

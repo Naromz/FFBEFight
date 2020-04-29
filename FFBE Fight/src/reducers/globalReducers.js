@@ -1,7 +1,7 @@
 import { GlobalActions } from '../actions/globalActions'
 
 
-export default (state = { curTurnData: { moves: [], effects: [] }, loading: true, turnNum: 0, curTurn: [], selUnitData: [], selunitplace: 0 }, action) => {
+export default (state = { loading: true, turnNum: 0, curTurn: [], selUnitData: [], selunitplace: 0 }, action) => {
 
 
     switch (action.type) {
@@ -101,8 +101,49 @@ export default (state = { curTurnData: { moves: [], effects: [] }, loading: true
 
 
         case GlobalActions.MODIFY_TURN_MOVES:
-            let curTurn = {};
+            let curmove = {};
 
+            let curMoves = state.curTurn;
+            console.log(state.curTurn);
+            let curTurn;
+            var found = false;
+            var remove = false;
+            if (curMoves.length > 0) {
+                curTurn = curMoves.map((val, idx) => {
+                    curmove = val;
+                    if (val.spot == action.payload.spot) {
+
+                        if (val.data[0].name == action.payload.data[0].name) {
+                            found = true;
+                            curmove = { spot: val.spot, data: [{ name: 'empty', effects: 'none' }] };
+                            return curmove;
+                        }
+                        if (val.data[0].effects[0]?.effect?.multicast) {
+                            found = true;
+                            curmove = { spot: val.spot, data: [...val.data, action.payload.data[0]] };
+                            return curmove;
+                        }
+                        else {
+                            found = true;
+                            curmove = action.payload;
+                            return curmove;
+                        }
+
+
+                    }
+                    else {
+                        return val;
+                    }
+
+                })
+                if (!found) {
+                    curTurn.push(action.payload);
+                }
+
+            }
+            else {
+                curTurn = [action.payload];
+            }
 
 
             return {
