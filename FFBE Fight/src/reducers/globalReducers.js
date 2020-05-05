@@ -1,7 +1,7 @@
 import { GlobalActions } from '../actions/globalActions'
 
 
-export default (state = { loading: true, turnNum: 0, curTurn: [], selUnitData: [], selunitplace: 0 }, action) => {
+export default (state = { loading: true, loadArray: { units: true, bosses: true }, turnNum: 0, curTurn: [], selUnitData: [], selunitplace: 0 }, action) => {
 
 
     switch (action.type) {
@@ -17,11 +17,15 @@ export default (state = { loading: true, turnNum: 0, curTurn: [], selUnitData: [
                 loading: true
             }
         case GlobalActions.LOADBOSSES.SUCCESS:
-
+            var loading = true;
+            if (state.loadArray.units == false) {
+                loading = false
+            }
             return {
                 ...state,
                 bossData: action.payload,
-                loading: false
+                loadArray: { ...state.loadArray, bosses: false },
+                loading: loading
 
             }
         case GlobalActions.LOADUNITS.START:
@@ -34,10 +38,15 @@ export default (state = { loading: true, turnNum: 0, curTurn: [], selUnitData: [
 
 
         case GlobalActions.LOADUNITS.SUCCESS:
+            var loading = true;
+            if (state.loadArray.bosses == false) {
+                loading = false
+            }
             return {
                 ...state,
                 unitData: action.payload,
-                loading: false
+                loadArray: { ...state.loadArray, units: false },
+                loading: loading
 
             }
 
@@ -120,7 +129,7 @@ export default (state = { loading: true, turnNum: 0, curTurn: [], selUnitData: [
                         }
                         if (val.data[0].effects[0]?.effect?.multicast) {
                             found = true;
-                            curmove = { spot: val.spot, data: [...val.data, action.payload.data[0]] };
+                            curmove = { uid: action.payload.uid, spot: val.spot, data: [...val.data, action.payload.data[0]] };
                             return curmove;
                         }
                         else {
@@ -179,7 +188,11 @@ export default (state = { loading: true, turnNum: 0, curTurn: [], selUnitData: [
         //     curTurn: { moves: [...state.curTurn.moves], effects: [...state.curTurn.effects] }
         // };
 
-
+        case GlobalActions.ADD_ACTIONS:
+            return {
+                ...state,
+                actions: action.payload
+            }
         case GlobalActions.SELECT_UNIT:
 
 

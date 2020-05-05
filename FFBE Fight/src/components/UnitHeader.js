@@ -92,6 +92,7 @@ justify-content:center;
 display:flex;
 `
 
+
 function findUnitData(data, pos) {
 
   let found;
@@ -118,14 +119,14 @@ function findUnitMoves(data, pos) {
   }
   return found;
 }
-function GetUnitMoves({ unitData, setMoveData, }) {
-
+function GetUnitMoves({ unitData, setMoveData, uid }) {
+  console.log(uid);
 
 
   if (unitData) {
 
     return unitData.map((val, idx) =>
-      <MoveBoxCont onClick={() => setMoveData(val)} key={idx}>
+      <MoveBoxCont onClick={() => setMoveData(val, uid)} key={idx}>
         <MoveImg key={idx} src={require(`../resources/images/Moves/${val.icon}`)} />
       </MoveBoxCont>);
   }
@@ -150,7 +151,7 @@ function App(props) {
           <StatBox>MAG {findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).stats[0].maxStats.mag}</StatBox>
         </FullRow>
         <MovesCont>{findUnitMoves(props.curTurn, props.selUnit) && findUnitMoves(props.curTurn, props.selUnit)} </MovesCont>
-        <MovesCont>{findUnitData(props.unitData, props.selUnit) && <GetUnitMoves setMoveData={(val) => props.modifyCurTurn(props.selUnit, val)} unitData={findUnitData(props.unitData, props.selUnit).moves} />}</MovesCont>
+        <MovesCont>{findUnitData(props.unitData, props.selUnit) && <GetUnitMoves uid={findUnitData(props.unitData, props.selUnit).uuid} setMoveData={(val, uid) => props.modifyCurTurn(props.selUnit, val, uid)} unitData={findUnitData(props.unitData, props.selUnit).moves} />}</MovesCont>
       </UnitStuffCont>
     </UnitData>
   );
@@ -166,7 +167,7 @@ const mapState = state => ({
 
 //THIS FUNCTION IS USED TO MAP ACTIONS TO FUNCTIONS
 const mapDispatch = dispatch => ({
-  modifyCurTurn: (spot, data) => dispatch(modifyCurTurn(spot, data)),
+  modifyCurTurn: (spot, data, uid) => dispatch(modifyCurTurn(spot, data, uid)),
 });
 
 export default connect(

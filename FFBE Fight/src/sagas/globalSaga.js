@@ -42,7 +42,7 @@ function* unitSaga(action) {
 
 function* effectSaga(action) {
     try {
-        const response = yield call(Axios.post, `http://localhost:3005/geteffects`);
+        const response = yield call(Axios.post, `http://codinghaze.com:3005/geteffects`);
 
         yield put({
             type: GlobalActions.LOADEFFECTS.SUCCESS,

@@ -1,40 +1,44 @@
 
-# - uid: 77ed04b8
-#   name: Attack of the Intangir
-#   waves:
-#     - uid: 7f773a26
-#       mobs: 
-#       - uid: 24c80d45
-#         name: Intangir
-#         img: Intangir
-#         hp: 230000
-#         elementalResistances:
-#           fire: 100
-#           ice: 100
-#           lightning: 100
-#           water: 100 
-#           wind: 100
-#           earth: 100
-#           light: 100
-#           dark: 100
-#         ailmentResistances:
-#           poison: 100
-#           blind: 100
-#           sleep: 100
-#           silence: 100
-#           paralysis: 100
-#           confusion: 100
-#           disease: 100
-#           petrification: 100
-#         notes:
-#           - note: Uses Meteor every turn magic is used
-#           - note: 50% and 20% Threshold where Meteor is used
-#           - note: First turn free.
-#           - note: ATK,SPR,DEF,MAG Breakable
-#         rules:
-#           - rule: { uid: 6c03d6e7, cond: mag, effect: meteor, turn: '+1'}
-#         turns:
-#           - turn: { uid: 8089d943, exact: 1, effect: 'nothing', note: 'nothing happens' }
+- uid: 77ed04b8
+  name: Attack of the Intangir
+  waves:
+    - uid: 7f773a26
+      mobs: 
+      - uid: 24c80d45
+        name: Intangir
+        img: Intangir
+        hp: 230000
+        elementalResistances:
+          fire: 100
+          ice: 100
+          lightning: 100
+          water: 100 
+          wind: 100
+          earth: 100
+          light: 100
+          dark: 100
+        ailmentResistances:
+          poison: 100
+          blind: 100
+          sleep: 100
+          silence: 100
+          paralysis: 100
+          confusion: 100
+          disease: 100
+          petrification: 100
+        cond:
+          - uid: 0289167b
+            trigger: {type: turn, repeat: 4}
+            moves: [{uid: cc4f3cea, percent: 100}]
+        notes:
+          - note: Uses Meteor every turn magic is used
+          - note: 50% and 20% Threshold where Meteor is used
+          - note: First turn free.
+          - note: ATK,SPR,DEF,MAG Breakable
+        rules:
+          - rule: { uid: 6c03d6e7, cond: mag, effect: meteor, turn: '+1'}
+        turns:
+          - turn: { uid: 8089d943, exact: 1, effect: 'nothing', note: 'nothing happens' }
 
 - uid: a4c588c9
   name: Scorn of the Mad Doll
@@ -42,7 +46,7 @@
     - uid: c536f315
       mobs: 
         - uid: dba953a7
-          name: Calca
+          name: Calca 1
           race: [demon,fairy]
           img: Calca
           hp: 100
@@ -234,7 +238,7 @@
             disease: 100
             petrification: 100
         - uid: 658fbafc
-          name: Brina
+          name: Brina 1
           race: [demon,fairy]
           img: Brina
           hp: 100
@@ -426,7 +430,7 @@
             disease: 100
             petrification: 100
         - uid: f1a3efd9
-          name: Calca
+          name: Calca 2
           race: [demon,fairy]
           img: Calca
           hp: 100
@@ -618,7 +622,7 @@
             disease: 100
             petrification: 100
         - uid: 1f96396d
-          name: Brina
+          name: Brina 2
           race: [demon,fairy]
           img: Brina
           hp: 100
@@ -810,7 +814,7 @@
             disease: 100
             petrification: 100
         - uid: 6b543891
-          name: Calca
+          name: Calca 3
           race: [demon,fairy]
           img: Calca
           hp: 100
@@ -1002,7 +1006,7 @@
             disease: 100
             petrification: 100
         - uid: 9e2dff7a
-          name: Brina
+          name: Brina 3
           race: [demon,fairy]
           img: Brina
           hp: 100

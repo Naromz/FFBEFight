@@ -9,9 +9,27 @@ import UnitHeader from '../components/UnitHeader';
 import UnitSelection from '../components/UnitSelectionBox';
 import loadStuff from '../Services/loadData';
 import globalReducers from '../reducers/globalReducers';
-import { changeActiveBoss } from '../actions/globalActions';
+import { changeActiveBoss, addActions } from '../actions/globalActions';
 import yaml from 'js-yaml'
 import searchdeep from '../Services/searchDeep';
+
+
+var HoverDisp = styled.div`
+display: ${props => props.test};
+position: fixed; 
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%; 
+height: 100%;
+overflow: auto; 
+background-color: rgb(0,0,0); 
+background-color: rgba(0,0,0,0.4); 
+
+flex-flow:wrap;
+justify-content:center;
+align-items:center;
+`
 
 var ContainAllCont = styled.div`
 width:800px;
@@ -43,14 +61,53 @@ var InfoBox = styled.div`
 width:300px;
 height:800px;
 outline:1px solid black;
-
 `
-
-
+var Actions = styled.div`
+width:900px;
+height:85%;
+outline:1px solid black;
+display:flex;
+flex-flow:wrap;
+justify-content:center;
+background-color:lightgray;
+`
+var ActionsHeader = styled.div`
+margin-top:10px;
+width:70%;
+height:28px;
+font-size:24px;
+text-align:center;
+`
+var ActionsBox = styled.div`
+width:850px;
+height:90%;
+border:2px solid black;
+background-color:white;
+border-radius:15px;
+display: flex;
+flex-direction: column;
+align-items:center;
+justify-content: flex-start;
+`
+var ActionDetail = styled.div`
+width:95%;
+height:22px;
+outline:1px solid black;
+display: flex;
+flex-direction: row;
+align-items:center;
+`
+var ActionDetailText = styled.div`
+outline:1px solid black;
+width:200px;
+padding: 0px 5px;
+height:100%;
+`
 function App(props) {
-
+  var [array, setArray] = useState([]);
   var [showInfo, setShowInfo] = useState(false);
   var [stateyaml, setStateYaml] = useState('');
+  var [showActions, setShowActions] = useState('none');
   useEffect(() => {
 
     loadStuff();
@@ -73,11 +130,90 @@ function App(props) {
       e.preventDefault();
     }
   }
+  function findUnitbyUID(UID, units) {
+    let found = false;
+    let unit;
+    for (let i = 0; i < units.length; i++) {
+      if (units[i].unitData.uuid == UID) {
+        unit = units[i];
+      }
 
+    }
+    return unit;
+  }
+
+  function filterMoves(curTurn) {
+    var arr = [];
+    let i = 0;
+    for (i = 0; i < curTurn.length; i++) {
+
+      arr = arr.concat(filterUnitMoves(curTurn[i]));
+    }
+
+    setArray(arr);
+  }
+
+
+  function filterUnitMoves(move) {
+    if (move?.data) {
+      let newArr = [];
+
+      for (let i = 0; i < move.data.length; i++) {
+        move.data[i].effects.forEach(element => {
+
+
+          //Handle Damage Effects
+          if (element.effect?.damage) {
+            if (element.effect?.area == "ST") {
+              if (element?.effect?.damage?.elements) {
+                newArr.push({ note: (element?.effect?.damage?.mecanism + " " + element?.effect?.damage?.coef), caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'ST Damage Elemental ' + element?.effect?.damage?.elements[0].charAt(0).toUpperCase() + element?.effect?.damage?.elements[0].slice(1), tar: props.curMobData?.name })
+              }
+              else {
+                newArr.push({ caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'ST Damage Non-Elemental', tar: props.curMobData?.name })
+              }
+
+            }
+            if (element.effect?.area == "AOE") {
+              if (element?.effect?.damage?.elements) {
+                newArr.push({ caster: findUnitbyUID(move?.uid, props.selUnits).unitData?.name, eff: 'AOE Damage Elemental ' + element?.effect?.damage?.elements[0].charAt(0).toUpperCase() + element?.effect?.damage?.elements[0].slice(1), tar: 'aoe' })
+              }
+              else {
+                newArr.push({ caster: findUnitbyUID(move?.uid, props.selUnits).unitData?.name, eff: 'AOE Damage Non-Elemental', tar: 'aoe' })
+              }
+
+            }
+          }
+
+          //Handle Resist Effects
+          if (element.effect?.resist) {
+            if (element.effect?.area == "AOE") {
+              newArr.push({ note: (element?.effect?.resist[0].percent), caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'AOE Resistance ' + element?.effect?.resist[0].name.charAt(0).toUpperCase() + element?.effect?.resist[0].name.slice(1), tar: 'Allies' })
+            }
+            else {
+              //newArr.push({ caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'ST Damage Non-Elemental', tar: props.curMobData?.name })
+            }
+
+          }
+        });
+      }
+
+      return newArr;
+    }
+
+  }
   const upHandler = (e) => {
     if (e.keyCode == 112) {
       e.preventDefault();
-      console.log(searchdeep(props.turnData));
+      if (showActions == 'none') {
+        setShowActions('flex');
+      }
+      else {
+
+        setShowActions('none');
+      }
+      filterMoves(props.turnData);
+
+      // console.log(searchdeep(props.turnData));
       // var keyList = getKeys(props.turnData[0].data);
       // var data = [];
       // for (let i = 0; i < keyList.length; i++) {
@@ -113,8 +249,21 @@ function App(props) {
   return (
     <Content>
 
-      <ContainAllCont>
 
+      <ContainAllCont>
+        <HoverDisp test={showActions}>
+          <Actions>
+            <ActionsHeader>
+              Actions
+            </ActionsHeader>
+            <ActionsBox>
+              <ActionDetail style={{ outline: '1px solid red' }}><ActionDetailText> Effects </ActionDetailText><ActionDetailText> Target </ActionDetailText><ActionDetailText> Caster </ActionDetailText><ActionDetailText> Note </ActionDetailText></ActionDetail>
+              {Array.isArray(array) && array.map((val, idx) => {
+                return (<ActionDetail><ActionDetailText>{val.eff}</ActionDetailText><ActionDetailText>{val.tar}</ActionDetailText> <ActionDetailText>{val.caster}</ActionDetailText>  <ActionDetailText>{val.note}</ActionDetailText> </ActionDetail>)
+              })}
+            </ActionsBox>
+          </Actions>
+        </HoverDisp>
         {!props.loading &&
 
 
@@ -139,6 +288,7 @@ const mapState = state => ({
   curMobData: state.globalReducer.curMob,
   waveData: state.globalReducer.curWaveData,
   turnData: state.globalReducer.curTurn,
+  selUnits: state.globalReducer.selUnitData,
   state: state
 });
 

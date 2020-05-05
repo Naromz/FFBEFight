@@ -1,5 +1,5 @@
 import globalReducers from "../reducers/globalReducers";
-
+import { v4 as uuidv4 } from 'uuid'
 
 export const GlobalActions = {
     ALERT_MESSAGE: 'ALERT_MESSAGE',
@@ -14,15 +14,16 @@ export const GlobalActions = {
     CHANGE_HP: 'CHANGE_HP',
     SEL_UNIT_PLACE: 'SEL_UNIT_PLACE',
     ADD_ACTIONS: 'ADD_ACTIONS'
-
 };
-export const addActionToState = (val, spot, side) => ({
+
+
+export const addActionToState = (val) => ({
     type: GlobalActions.ADD_ACTIONS,
-    payload: { data: val, spot: spot, side: side }
+    payload: { data: val }
 })
 export const selectUnit = (UnitData, Position) => ({
     type: GlobalActions.SELECT_UNIT,
-    payload: { unitData: UnitData, selected: Position }
+    payload: { unitData: { ...UnitData, uuid: uuidv4() }, selected: Position }
 })
 export const alertMessage = (val) => ({
     type: GlobalActions.ALERT_MESSAGE,
@@ -45,9 +46,9 @@ export const sagaStart = () => ({
     type: GlobalActions.TESTSAGA.START,
     payload: null
 })
-export const modifyCurTurn = (spot, data) => ({
+export const modifyCurTurn = (spot, data, uid) => ({
     type: GlobalActions.MODIFY_TURN_MOVES,
-    payload: { spot: spot, data: [data] }
+    payload: { uid: uid, spot: spot, data: [data] }
 })
 export const loadEffectStart = (effectArr) => ({
     type: GlobalActions.LOADEFFECTS.START,

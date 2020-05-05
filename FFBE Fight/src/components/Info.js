@@ -19,6 +19,11 @@ var ActionsBox = styled.div`
 width:800px;
 height:220px;
 outline:1px solid black;
+
+display:flex;
+flex-direction:row;
+justify-content:space-evenly;
+align-items:center;
 `
 var HeadingBox = styled.div`
 width:100%;
@@ -28,6 +33,46 @@ outline:1px solid black;
 font-size:24px;
 
 `
+var ActionList = styled.div`
+width:25%;
+height:100%;
+outline:1px solid black;
+`
+var ActionDetails = styled.div`
+width:70%;
+height:100%;
+outline:1px solid black;
+display:flex;
+flex-direction:column;
+justify-content:flex-start;
+align-items:center;
+`
+var ActionDiv = styled.div`
+width:100%;
+height:22px;
+outline:1px solid black;
+color: ${props => props.color};
+display:flex;
+flex-direction:column;
+justify-content:flex-start;
+align-items:center;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
+`
+var ActionDetailHeading = styled.div`
+outline:1px solid black;
+width:100%;
+background-color:white;
+height:32px;
+display:flex;
+align-items:center;
+justify-content:center;
+`
+
 function findMove(data, moveid) {
   if (data) {
     let moves = [];
@@ -46,11 +91,18 @@ function findMove(data, moveid) {
 
 }
 
-function CalcTurnData(data, turnnum) {
+function CalcTurnData(data, turnnum, selMove, setSelMove) {
   let moveData = [];
-  if (data) {
 
-    data.cond.forEach(element => {
+
+  if (data) {
+    for (let move = 0; move < data.cond.length; move++) {
+      let color = 'black';
+      if (selMove == move) {
+        console.log(selMove);
+        color = 'red';
+      }
+      let element = data.cond[move];
       if (element.trigger.type == 'turn') {
 
         let curMoveData = [];
@@ -64,9 +116,10 @@ function CalcTurnData(data, turnnum) {
           }
 
         }
-        moveData.push(<p key={shortid.generate()}>Turn Condition: {(curMoveData)}</p>)
+        moveData.push(<ActionDiv onClick={() => setSelMove(move)} color={color} key={element.uid}>{(curMoveData)}</ActionDiv>)
       }
-    });
+    }
+
     // return data.cond.map((val, idx) => {
     //   if (val.trigger.type == 'turn') {
     //     val.moves.forEach(element => {
@@ -86,11 +139,20 @@ function CalcTurnData(data, turnnum) {
 
 
 function App(props) {
-
+  const [selMove, setSelMove] = useState(0);
   return (
     <Space>
       <HeadingBox>Actions Turn {props.turnNum}</HeadingBox>
-      <ActionsBox>{CalcTurnData(props.selBoss, props.turnNum)}</ActionsBox>
+      {/* <ActionsBox>{CalcTurnData(props.selBoss, props.turnNum)}</ActionsBox> */}
+      <ActionsBox>
+        <ActionList>
+          {CalcTurnData(props.selBoss, props.turnNum, selMove, setSelMove)}
+        </ActionList>
+        <ActionDetails>
+          <ActionDetailHeading>test</ActionDetailHeading>
+        </ActionDetails>
+
+      </ActionsBox>
     </Space>
   );
 
