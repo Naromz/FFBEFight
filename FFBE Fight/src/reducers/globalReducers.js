@@ -5,6 +5,13 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
 
 
     switch (action.type) {
+
+        case GlobalActions.SET_CURCOND:
+            return {
+                ...state,
+                curCond: action.payload
+
+            }
         case GlobalActions.ALERT_MESSAGE:
             alert(action.payload);
             return {

@@ -13,10 +13,14 @@ export const GlobalActions = {
     CHANGE_MOB: 'CHANGE_MOB',
     CHANGE_HP: 'CHANGE_HP',
     SEL_UNIT_PLACE: 'SEL_UNIT_PLACE',
-    ADD_ACTIONS: 'ADD_ACTIONS'
+    ADD_ACTIONS: 'ADD_ACTIONS',
+    SET_CURCOND: 'SET_CURCOND'
 };
 
-
+export const setCurCond = (val) => ({
+    type: GlobalActions.SET_CURCOND,
+    payload: val
+});
 export const addActionToState = (val) => ({
     type: GlobalActions.ADD_ACTIONS,
     payload: { data: val }

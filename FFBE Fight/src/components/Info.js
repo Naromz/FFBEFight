@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { alertMessage, sagaStart, modifyCurTurn } from '../actions/globalActions'
+import { alertMessage, sagaStart, modifyCurTurn, setCurCond } from '../actions/globalActions'
 import styled from 'styled-components'
 import shortid from 'shortid'
 
@@ -57,11 +57,11 @@ flex-direction:column;
 justify-content:flex-start;
 align-items:center;
 -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; 
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+          -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; 
 `
 var ActionDetailHeading = styled.div`
 outline:1px solid black;
@@ -73,30 +73,48 @@ align-items:center;
 justify-content:center;
 `
 
+var ActionCondHeading = styled.div`
+width:100%;
+height:32px;
+margin-top:1px;
+outline:1px solid gray;
+
+display:flex;
+align-items:center;
+justify-content:center;
+`
+var ActionCondDesc = styled.div`
+width:100%;
+height:32px;
+margin-top:1px;
+outline:1px solid gray;
+align-items:center;
+justify-content:center;
+`
 function findMove(data, moveid) {
   if (data) {
-    let moves = [];
-    let move = data.map((val, idx) => {
-      if (val.uid == moveid) {
-        moves.push(val.name);
+    let i = 0;
+
+    for (i = 0; i < data.length; i++) {
+      if (data[i].uid == moveid) {
+        return data[i];
       }
-      else {
-        return
-      }
-    })
-    return moves;
+    }
+
   }
 
   else return null;
 
 }
 
-function CalcTurnData(data, turnnum, selMove, setSelMove) {
+function CalcTurnData(data, turnnum, selMove, setSelMove, setCurCond) {
   let moveData = [];
 
 
   if (data) {
+
     for (let move = 0; move < data.cond.length; move++) {
+      let curMoves = [];
       let color = 'black';
       if (selMove == move) {
         console.log(selMove);
@@ -108,15 +126,20 @@ function CalcTurnData(data, turnnum, selMove, setSelMove) {
         let curMoveData = [];
 
         for (let i = 0; i < element.moves.length; i++) {
+
+
+          let curMove = findMove(data.moves, element.moves[i].uid);
+          curMoves.push({ curMove });
+
           if (element.moves.length == 1) {
-            curMoveData.push(findMove(data.moves, element.moves[i].uid));
+            curMoveData.push(curMove.name);
           }
           else {
-            curMoveData.push(findMove(data.moves, element.moves[i].uid) + ", ");
+            curMoveData.push(curMove.name + ", ");
           }
 
         }
-        moveData.push(<ActionDiv onClick={() => setSelMove(move)} color={color} key={element.uid}>{(curMoveData)}</ActionDiv>)
+        moveData.push(<ActionDiv onClick={() => { setCurCond({ ...data.cond[move], moveData: curMoves }); setSelMove(move); }} color={color} key={element.uid}>{(curMoveData)}</ActionDiv>)
       }
     }
 
@@ -125,6 +148,7 @@ function CalcTurnData(data, turnnum, selMove, setSelMove) {
     //     val.moves.forEach(element => {
     //       moveData.push(findMove(data.moves, element.uid))
     //     });
+
     return moveData;
     //   }
     // })
@@ -140,16 +164,20 @@ function CalcTurnData(data, turnnum, selMove, setSelMove) {
 
 function App(props) {
   const [selMove, setSelMove] = useState(0);
+  const [cond, setCond] = useState({ name: '', why: '', active: false, uid: null })
   return (
     <Space>
-      <HeadingBox>Actions Turn {props.turnNum}</HeadingBox>
+      <HeadingBox>Actions</HeadingBox>
       {/* <ActionsBox>{CalcTurnData(props.selBoss, props.turnNum)}</ActionsBox> */}
       <ActionsBox>
         <ActionList>
-          {CalcTurnData(props.selBoss, props.turnNum, selMove, setSelMove)}
+          {CalcTurnData(props.selBoss, props.turnNum, selMove, setSelMove, props.setCurMove)}
         </ActionList>
         <ActionDetails>
-          <ActionDetailHeading>test</ActionDetailHeading>
+          <ActionDetailHeading >{props.cond?.trigger && JSON.stringify(props.cond.trigger)}</ActionDetailHeading>
+          <ActionCondHeading>Triggered False</ActionCondHeading>
+          <ActionCondHeading>{props.cond?.uid && props.cond.uid}</ActionCondHeading>
+          {props.cond?.moveData && props.cond?.moveData.map((val, idx) => { return <ActionCondHeading key={idx}>{val.curMove.desc}</ActionCondHeading> })}
         </ActionDetails>
 
       </ActionsBox>
@@ -161,13 +189,14 @@ function App(props) {
 const mapState = state => ({
   turnNum: state.globalReducer.turnNum,
   bossData: state.globalReducer.curWaveData,
-  selBoss: state.globalReducer.curMob
+  selBoss: state.globalReducer.curMob,
+  cond: state.globalReducer.curCond,
 });
 
 
 //THIS FUNCTION IS USED TO MAP ACTIONS TO FUNCTIONS
 const mapDispatch = dispatch => ({
-
+  setCurMove: (val) => dispatch(setCurCond(val)),
 });
 
 export default connect(
