@@ -17,7 +17,7 @@ align-items:center;
 
 `
 var MovesCont = styled.div`
-width:800px;
+width:790px;
 height:48px;
 outline:1px solid black;
 display:flex;
@@ -36,7 +36,6 @@ height:24px;
 var UnitData = styled.div`
 width:800px;
 height:128px;
-border-radius:6px;
 border:1px solid black;
 background-color:lightgray;
 display:flex;
@@ -54,7 +53,7 @@ justify-content:center;
 align-items:center;
 `
 var UnitStuffCont = styled.div`
-width:650px;
+width:600px;
 height:100%;
 display:flex;
 flex-flow:wrap;
@@ -81,7 +80,7 @@ justify-content:center;
 display:flex;
 `
 var StatBox = styled.div`
-width:100px;
+width:85px;
 height:35px;
 outline:1px solid black;
 font-size:18px;
@@ -91,7 +90,6 @@ align-items:center;
 justify-content:center;
 display:flex;
 `
-
 
 function findUnitData(data, pos) {
 

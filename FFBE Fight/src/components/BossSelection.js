@@ -34,16 +34,16 @@ var BossHeader = styled.div`
 width:800px;
 height:64px;
 border:1px solid black;
-border-radius:6px;
 display:flex;
 flex-wrap:wrap;
 flex-direction:row;
 justify-content:flex-start;
+align-items:center;
 
 `
 var BossBox = styled.div`
 width:48px;
-height:64px;
+height:58px;
 border:1px solid black;
 background-color: ${props => props.color};
 border-radius:2px;

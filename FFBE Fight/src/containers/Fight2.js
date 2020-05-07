@@ -11,6 +11,7 @@ import loadStuff from '../Services/loadData';
 import globalReducers from '../reducers/globalReducers';
 import { changeActiveBoss, addActions } from '../actions/globalActions';
 import yaml from 'js-yaml'
+import ManagementBox from '../components/ManagementBox'
 import searchdeep from '../Services/searchDeep';
 
 
@@ -275,7 +276,9 @@ function App(props) {
             <UnitSelection></UnitSelection>
           </>
         }
-        <ExportString value={stateyaml}></ExportString>
+        <ManagementBox></ManagementBox>
+
+        {/* <ExportString value={stateyaml}></ExportString> */}
       </ContainAllCont>
     </Content >
   );

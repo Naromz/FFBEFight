@@ -10,7 +10,6 @@ import globalReducers from '../reducers/globalReducers';
 var UnitData = styled.div`
 width:800px;
 height:64px;
-border-radius:6px;
 border:1px solid black;
 background-color:lightgray;
 display:flex;

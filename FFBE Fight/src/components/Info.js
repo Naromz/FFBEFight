@@ -16,9 +16,9 @@ align-items:flex-start;
 outline:1px solid black;
 `
 var ActionsBox = styled.div`
-width:800px;
+width:750px;
 height:220px;
-outline:1px solid black;
+border:1px solid black;
 
 display:flex;
 flex-direction:row;
@@ -26,7 +26,7 @@ justify-content:space-evenly;
 align-items:center;
 `
 var HeadingBox = styled.div`
-width:100%;
+width:95%;
 text-align:center;
 height:30px;
 outline:1px solid black;

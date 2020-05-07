@@ -9,7 +9,6 @@ import { changeHp } from '../actions/globalActions'
 var BossHeader = styled.div`
 width:800px;
 height:128px;
-border-radius:6px;
 border:1px solid black;
 background-color:lightgray;
 display:flex;
