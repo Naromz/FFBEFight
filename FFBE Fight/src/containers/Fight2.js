@@ -100,7 +100,7 @@ align-items:center;
 `
 var ActionDetailText = styled.div`
 outline:1px solid black;
-width:200px;
+flex:1;
 padding: 0px 5px;
 height:100%;
 `
@@ -161,7 +161,28 @@ function App(props) {
 
       for (let i = 0; i < move.data.length; i++) {
         move.data[i].effects.forEach(element => {
+          if (element.effect?.multicast) {
+            newArr.push({
+              note: 'Activate Multicast Skills', tar: 'NA', caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'Multicast'
+            })
 
+          }
+
+          if (element.effect?.imperil) {
+            let imperillvl;
+
+
+            let imperil = 0;
+
+            for (imperil = 0; imperil < Object.entries(element.effect?.imperil).length; imperil++) {
+              let [key, val] = Object.entries(element.effect?.imperil)[imperil];
+              newArr.push({
+                note: key + " " + val, tar: 'ENEMY', caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'Imperil'
+              })
+            }
+
+
+          }
 
           //Handle Damage Effects
           if (element.effect?.damage) {
@@ -170,16 +191,16 @@ function App(props) {
                 newArr.push({ note: (element?.effect?.damage?.mecanism + " " + element?.effect?.damage?.coef), caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'ST Damage Elemental ' + element?.effect?.damage?.elements[0].charAt(0).toUpperCase() + element?.effect?.damage?.elements[0].slice(1), tar: props.curMobData?.name })
               }
               else {
-                newArr.push({ caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'ST Damage Non-Elemental', tar: props.curMobData?.name })
+                newArr.push({ note: (element?.effect?.damage?.mecanism + " " + element?.effect?.damage?.coef), caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'ST Damage Non-Elemental', tar: props.curMobData?.name })
               }
 
             }
             if (element.effect?.area == "AOE") {
               if (element?.effect?.damage?.elements) {
-                newArr.push({ caster: findUnitbyUID(move?.uid, props.selUnits).unitData?.name, eff: 'AOE Damage Elemental ' + element?.effect?.damage?.elements[0].charAt(0).toUpperCase() + element?.effect?.damage?.elements[0].slice(1), tar: 'aoe' })
+                newArr.push({ note: (element?.effect?.damage?.mecanism + " " + element?.effect?.damage?.coef), caster: findUnitbyUID(move?.uid, props.selUnits).unitData?.name, eff: 'AOE Damage Elemental ' + element?.effect?.damage?.elements[0].charAt(0).toUpperCase() + element?.effect?.damage?.elements[0].slice(1), tar: 'aoe' })
               }
               else {
-                newArr.push({ caster: findUnitbyUID(move?.uid, props.selUnits).unitData?.name, eff: 'AOE Damage Non-Elemental', tar: 'aoe' })
+                newArr.push({ note: (element?.effect?.damage?.mecanism + " " + element?.effect?.damage?.coef), caster: findUnitbyUID(move?.uid, props.selUnits).unitData?.name, eff: 'AOE Damage Non-Elemental', tar: 'aoe' })
               }
 
             }
@@ -188,13 +209,14 @@ function App(props) {
           //Handle Resist Effects
           if (element.effect?.resist) {
             if (element.effect?.area == "AOE") {
-              newArr.push({ note: (element?.effect?.resist[0].percent), caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'AOE Resistance ' + element?.effect?.resist[0].name.charAt(0).toUpperCase() + element?.effect?.resist[0].name.slice(1), tar: 'Allies' })
+              newArr.push({ note: (element?.effect?.resist[0].percent), caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'AOE Resistance ' + element?.effect?.resist[0].name.charAt(0).toUpperCase() + element?.effect?.resist[0].name.slice(1), tar: 'Allies', turns: element?.effect?.turns })
             }
             else {
               //newArr.push({ caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'ST Damage Non-Elemental', tar: props.curMobData?.name })
             }
 
           }
+
         });
       }
 
@@ -260,7 +282,7 @@ function App(props) {
             <ActionsBox>
               <ActionDetail style={{ outline: '1px solid red' }}><ActionDetailText> Effects </ActionDetailText><ActionDetailText> Target </ActionDetailText><ActionDetailText> Caster </ActionDetailText><ActionDetailText> Note </ActionDetailText></ActionDetail>
               {Array.isArray(array) && array.map((val, idx) => {
-                return (<ActionDetail><ActionDetailText>{val.eff}</ActionDetailText><ActionDetailText>{val.tar}</ActionDetailText> <ActionDetailText>{val.caster}</ActionDetailText>  <ActionDetailText>{val.note}</ActionDetailText> </ActionDetail>)
+                return (<ActionDetail key={idx}><ActionDetailText>{val.eff}</ActionDetailText><ActionDetailText>{val.tar}</ActionDetailText> <ActionDetailText>{val.caster}</ActionDetailText>  <ActionDetailText>{val.note}</ActionDetailText> </ActionDetail>)
               })}
             </ActionsBox>
           </Actions>

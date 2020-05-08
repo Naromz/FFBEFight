@@ -103,7 +103,6 @@ function findUnitData(data, pos) {
 }
 
 function findUnitMoves(data, pos) {
-  console.log(data);
   let found;
   for (let i = 0; i < data.length; i++) {
     if (data[i].spot == pos) {
@@ -118,7 +117,6 @@ function findUnitMoves(data, pos) {
   return found;
 }
 function GetUnitMoves({ unitData, setMoveData, uid }) {
-  console.log(uid);
 
 
   if (unitData) {

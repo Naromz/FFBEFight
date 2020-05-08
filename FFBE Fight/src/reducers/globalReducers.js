@@ -1,7 +1,7 @@
 import { GlobalActions } from '../actions/globalActions'
 
 
-export default (state = { loading: true, loadArray: { units: true, bosses: true }, turnNum: 0, curTurn: [], selUnitData: [], selunitplace: 0 }, action) => {
+export default (state = { loading: true, loadArray: { units: true, bosses: true }, turnNum: 0, curTurn: [], selUnitData: [], selunitplace: 0, turnData: [] }, action) => {
 
 
     switch (action.type) {
@@ -120,7 +120,6 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
             let curmove = {};
 
             let curMoves = state.curTurn;
-            console.log(state.curTurn);
             let curTurn;
             var found = false;
             var remove = false;
@@ -230,6 +229,14 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
             return {
                 ...state,
                 selunitplace: action.payload
+            }
+        case GlobalActions.NEXT_TURN:
+            return {
+                ...state,
+                turnNum: state.turnNum + 1,
+                turnData: state.turnData.concat([{ turn: state.turnNum + 1, alliesData: state.curTurn, bossData: null }]),
+                curTurn: []
+
             }
 
         case GlobalActions.TESTSAGA.SUCCESS || GlobalActions.TESTSAGA.FAIL:

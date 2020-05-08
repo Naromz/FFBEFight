@@ -2,402 +2,657 @@
 units:
   - uid: None
     name: none
-  - uid: c8bc155f
-    name: Regina
-    img: regina
-    fullimg: reginafull
+  - uid: b92b236c
+    name: Dark Spirit Sol
+    img: darkspiritsol
+    fullimg: darkspiritsolfull
     stats:
+      - maxStats:
+          hp: 4544
+          mp: 279
+          atk: 135
+          def: 144
+          mag: 220
+          spr: 208
+      - minStats:
+          hp: 1500
+          mp: 92
+          atk: 45
+          def: 48
+          mag: 73
+          spr: 69
+      - pots:
+          hp: 540
+          mp: 90
+          atk: 40
+          def: 40
+          mag: 65
+          spr: 40
+
     moves:
-      - id: '230081'
-        name: Regina Cannon
-        icon: ability_10.png
-        effects:
-          - effect:
-              damage:
-                mecanism: physical
-                damageType: body
-                coef: 1
-                ignore:
-                  def: 50
-              area: ST
-              target: ENEMY
-            desc: 'Physical damage (1x * 2 = 2x, ATK) to one enemy (ignore cover)'
-          - effect:
-              statsBuff:
-                lbDamage: 120
-              turns: 2
-              area: SELF
-              target: SELF
-            desc: Increase LB damage by 120% for 2 turns
-        frames:
-          - 40
-        move: walk
-        type: ability
-        mpCost: 28
-        rarity: 5
-        level: 1
-      - id: '230082'
-        name: Speed Mode
-        icon: ability_96.png
-        effects:
-          - effect:
-              noUse: true
-              mirage: 3
-              turns: 2
-              area: SELF
-              target: SELF
-            desc: Dodge 3 physical attacks for 2 turns to caster
-          - effect:
-              lbFill:
-                min: 25
-                max: 25
-              area: SELF
-              target: SELF
-            desc: Increase LB gauge by 25 to caster
-          - effect:
-              skillEnhancement:
-                '230081': 2
-              turn: 1
-            desc: Increase damage of Regina Cannon (230081) by 200% for one turn
-        type: ability
-        mpCost: 42
-        rarity: 5
-        level: 20
-      - id: '230092'
-        name: Master Order
-        icon: ability_96.png
-        effects:
-          - effect: null
-            desc: Fixed damage (3000) to the rest of the party
-          - effect:
-              noUse: true
-              globalMitigation: 50
-              turns: 1
-              area: SELF
-              target: SELF
-            desc: Reduce damage taken by 50% to caster for one turn
-          - effect: null
-            desc: Restore 100% HP and MP to caster
-          - effect:
-              lbFill:
-                min: 100
-                max: 100
-              area: SELF
-              target: SELF
-            desc: Increase LB gauge by 100 to caster
-        type: ability
-        rarity: 5
-        level: 55
-      - id: '230083'
-        name: Offense Mode
-        icon: ability_96.png
-        effects:
-          - effect:
-              statsBuff:
-                atk: 150
-                mag: 150
-              turns: 2
-              area: SELF
-              target: SELF
-            desc: Increase ATK and MAG by 150% for 2 turns to caster
-          - effect:
-              lbFill:
-                min: 25
-                max: 25
-              area: SELF
-              target: SELF
-            desc: Increase LB gauge by 25 to caster
-          - effect:
-              skillEnhancement:
-                '230081': 2
-              turn: 1
-            desc: Increase damage of Regina Cannon (230081) by 200% for one turn
-        type: ability
-        mpCost: 42
-        rarity: 6
-        level: 40
-      - id: '230084'
-        name: Defense Mode
-        icon: ability_96.png
-        effects:
-          - effect:
-              statsBuff:
-                def: 150
-                spr: 150
-              turns: 2
-              area: SELF
-              target: SELF
-            desc: Increase DEF and SPR by 150% for 2 turns to caster
-          - effect:
-              lbFill:
-                min: 25
-                max: 25
-              area: SELF
-              target: SELF
-            desc: Increase LB gauge by 25 to caster
-          - effect:
-              skillEnhancement:
-                '230081': 2
-              turn: 1
-            desc: Increase damage of Regina Cannon (230081) by 200% for one turn
-        type: ability
-        mpCost: 42
-        rarity: 6
-        level: 60
-      - id: '230085'
-        name: Barrier Mode
-        icon: ability_96.png
-        effects:
-          - effect:
-              noUse: true
-              area: SELF
-              target: SELF
-            desc: Grant a 2000 HP shield to caster for 2 turns
-          - effect:
-              lbFill:
-                min: 25
-                max: 25
-              area: SELF
-              target: SELF
-            desc: Increase LB gauge by 25 to caster
-          - effect:
-              skillEnhancement:
-                '230081': 2
-              turn: 1
-            desc: Increase damage of Regina Cannon (230081) by 200% for one turn
-        type: ability
-        mpCost: 42
-        rarity: 6
-        level: 80
-      - id: '509360'
-        name: Penta-Tactics
-        icon: ability_8.png
+      - id: '200150'
+        name: Dualcast
+        icon: Ability_26.png
         effects:
           - effect:
               multicast:
-                time: 5
-                type: skills
-                skills:
-                  - id: '230081'
-                    name: Regina Cannon
-                  - id: '230082'
-                    name: Speed Mode
-                  - id: '230083'
-                    name: Offense Mode
-                  - id: '230084'
-                    name: Defense Mode
-                  - id: '230085'
-                    name: Barrier Mode
-                  - id: '230086'
-                    name: Anti-Fairy Module
-                  - id: '230087'
-                    name: Anti-Demon Module
-                  - id: '230088'
-                    name: Anti-Machine Module
-                  - id: '230089'
-                    name: Reboot Command
-                  - id: '230090'
-                    name: Power Generator
-                  - id: '230091'
-                    name: Cana's System
-            desc: >-
-              Gain 5 uses of Anti-Demon Module (230087), Anti-Fairy Module (230086),
-              Anti-Machine Module (230088), Barrier Mode (230085), Cana's System
-              (230091), Defense Mode (230084), Offense Mode (230083), Power Generator
-              (230090), Reboot Command (230089), Regina Cannon (230081) and Speed Mode
-              (230082) for one turn
-        type: ability
-      - id: '230086'
-        name: Anti-Fairy Module
-        icon: ability_96.png
+                time: 2
+                type: magic
+            desc: Enable unit to use magic (excluding blue magic) twice in one turn
+        type: Ability
+        rarity: 5
+        level: 1
+      - id: '233490'
+        name: Demon's Might
+        icon: Ability_79.png
         effects:
           - effect:
-              killers:
-                - name: spirit
-                  physical: 150
-              turns: 2
+              statsBuff:
+                mag: 150
+              turns: 3
               area: SELF
               target: SELF
-            desc: Increase physical damage against Fairies by 150% to caster for 2 turns
-          - effect:
-              lbFill:
-                min: 25
-                max: 25
-              area: SELF
-              target: SELF
-            desc: Increase LB gauge by 25 to caster
-          - effect:
-              skillEnhancement:
-                '230081': 5
-              turn: 1
-            desc: Increase damage of Regina Cannon (230081) by 500% for one turn
-        type: ability
-        mpCost: 58
-        rarity: 7
-        level: 105
-      - id: '230087'
-        name: Anti-Demon Module
-        icon: ability_96.png
-        effects:
+            desc: Increase MAG by 150% for 3 turns to caster
           - effect:
               killers:
                 - name: demon
-                  physical: 150
-              turns: 2
+                  magical: 50
+                - name: human
+                  magical: 50
+              turns: 3
               area: SELF
               target: SELF
-            desc: Increase physical damage against Demons by 150% to caster for 2 turns
-          - effect:
-              lbFill:
-                min: 25
-                max: 25
-              area: SELF
-              target: SELF
-            desc: Increase LB gauge by 25 to caster
-          - effect:
-              skillEnhancement:
-                '230081': 5
-              turn: 1
-            desc: Increase damage of Regina Cannon (230081) by 500% for one turn
-        type: ability
-        mpCost: 58
-        rarity: 7
-        level: 105
-      - id: '230088'
-        name: Anti-Machine Module
-        icon: ability_96.png
+            desc: >-
+              Increase magic damage against Demons and Humans by 50% to caster for 3
+              turns
+        type: Ability
+        mpCost: 22
+        rarity: 5
+        level: 10
+      - id: '233491'
+        name: Obliterating Flame (Di)
+        icon: Ability_21.png
         effects:
           - effect:
-              killers:
-                - name: machine
-                  physical: 150
-              turns: 2
-              area: SELF
-              target: SELF
-            desc: Increase physical damage against Machinas by 150% to caster for 2 turns
+              damage:
+                mecanism: magical
+                damageType: mind
+                coef: 6.5
+                elements:
+                  - fire
+              area: AOE
+              target: ENEMY
+            desc: 'Magic fire damage (6.5x, MAG) to all enemies'
           - effect:
-              lbFill:
-                min: 25
-                max: 25
-              area: SELF
-              target: SELF
-            desc: Increase LB gauge by 25 to caster
-          - effect:
-              skillEnhancement:
-                '230081': 5
-              turn: 1
-            desc: Increase damage of Regina Cannon (230081) by 500% for one turn
-        type: ability
-        mpCost: 58
-        rarity: 7
-        level: 105
-      - id: '230089'
-        name: Reboot Command
-        icon: ability_96.png
+              imperil:
+                fire: 80
+              turns: 3
+              area: AOE
+              target: ENEMY
+            desc: Reduce resistance to Fire by 80% for 3 turns to all enemies
+        frames:
+          - 52
+          - 72
+          - 92
+          - 112
+          - 132
+        chainFamily: CW
+        move: none
+        type: Ability
+        mpCost: 39
+        rarity: 5
+        level: 40
+      - id: '233492'
+        name: Obliterating Darkness (Di)
+        icon: Ability_26.png
         effects:
           - effect:
-              noUse: true
+              damage:
+                mecanism: magical
+                damageType: mind
+                coef: 6.5
+                elements:
+                  - dark
+              area: AOE
+              target: ENEMY
+            desc: 'Magic dark damage (6.5x, MAG) to all enemies'
+          - effect:
+              imperil:
+                dark: 80
+              turns: 3
+              area: AOE
+              target: ENEMY
+            desc: Reduce resistance to Dark by 80% for 3 turns to all enemies
+        frames:
+          - 52
+          - 72
+          - 92
+          - 112
+          - 132
+        chainFamily: CW
+        move: none
+        type: Ability
+        mpCost: 39
+        rarity: 5
+        level: 40
+      - id: '233493'
+        name: Demon's Solace
+        icon: Ability_4.png
+        effects:
+          - effect:
+              damage:
+                mecanism: magical
+                damageType: mind
+                coef: 3.4
+              area: ST
+              target: ENEMY
+            desc: 'Magic damage (3.4x, MAG) to one enemy'
+          - effect: null
+            desc: Restore 25% HP and MP to caster
+        frames:
+          - 42
+          - 62
+          - 82
+          - 102
+          - 122
+          - 142
+          - 162
+          - 182
+        chainFamily: CWA
+        move: none
+        type: Ability
+        mpCost: 44
+        rarity: 6
+        level: 22
+      - id: '233495'
+        name: Dark Demon Strike
+        icon: Ability_39.png
+        effects:
+          - effect:
+              damage:
+                mecanism: magical
+                damageType: mind
+                coef: 2.5
+                ignore:
+                  spr: 50
+              area: AOE
+              target: ENEMY
+            desc: 'Magic damage (2.5x * 2 = 5x, MAG) to all enemies (ignore reflect)'
+          - effect:
+              break:
+                spr: 60
+              turns: 5
+              area: AOE
+              target: ENEMY
+            desc: Reduce SPR by 60% for 5 turns to all enemies
+        frames:
+          - 42
+          - 62
+          - 82
+          - 102
+          - 122
+          - 142
+          - 162
+          - 182
+        chainFamily: CWA
+        move: none
+        type: Ability
+        mpCost: 48
+        rarity: 6
+        level: 50
+      - id: '233494'
+        name: Fire and Dark Field
+        icon: Ability_9.png
+        effects:
+          - effect:
+              resist:
+                - name: fire
+                  percent: 75
+                - name: dark
+                  percent: 75
+              turns: 3
+              area: AOE
+              target: ALLY
+            desc: Increase resistance to Fire and Dark by 75% for 3 turns to all allies
+        type: Ability
+        mpCost: 38
+        rarity: 6
+        level: 50
+      - id: '233496'
+        name: Devil's Exchange
+        icon: Ability_63.png
+        effects:
+          - effect:
+              statsBuff:
+                mag: 200
+              turns: 3
               area: SELF
               target: SELF
-            desc: 'Remove ATK, DEF, MAG and SPR debuff from caster'
+            desc: Increase MAG by 200% for 3 turns to caster
           - effect:
-              lbFill:
-                min: 25
-                max: 25
-              area: SELF
-              target: SELF
-            desc: Increase LB gauge by 25 to caster
+              statsBuff:
+                spr: -70
+              turns: 3
+              area: AOE
+              target: ALLY_BUT_SELF
+            desc: Reduce SPR by 70% for 3 turns to the rest of the party
           - effect:
-              skillEnhancement:
-                '230081': 8
-              turn: 1
-            desc: Increase damage of Regina Cannon (230081) by 800% for one turn
-        type: ability
-        mpCost: 58
+              break:
+                spr: 70
+              turns: 3
+              area: AOE
+              target: ENEMY
+            desc: Reduce SPR by 70% for 3 turns to all enemies
+        type: Ability
+        mpCost: 42
+        rarity: 6
+        level: 68
+      - id: '233497'
+        name: Obliterate
+        icon: Ability_10.png
+        effects:
+          - effect:
+              damage:
+                mecanism: magical
+                damageType: mind
+                coef: 4.5
+                ignore:
+                  spr: 50
+              area: AOE
+              target: ENEMY
+            desc: 'Magic damage (4.5x * 2 = 9x, MAG) to all enemies (ignore reflect)'
+        frames:
+          - 52
+          - 72
+          - 92
+          - 112
+          - 132
+        chainFamily: CW
+        move: none
+        type: Ability
+        mpCost: 50
+        rarity: 6
+        level: 80
+      - id: '510890'
+        name: Dual Obliteration
+        icon: Ability_8.png
+        effects:
+          - effect:
+              multicast:
+                time: 2
+                type: skills
+                skills:
+                  - id: '233490'
+                    name: Demon's Might
+                  - id: '233491'
+                    name: Obliterating Flame (Di)
+                  - id: '233492'
+                    name: Obliterating Darkness (Di)
+                  - id: '233493'
+                    name: Demon's Solace
+                  - id: '233494'
+                    name: Fire and Dark Field
+                  - id: '233495'
+                    name: Dark Demon Strike
+                  - id: '233496'
+                    name: Devil's Exchange
+                  - id: '233497'
+                    name: Obliterate
+                  - id: '233500'
+                    name: Deflagrating Heat (Di)
+                  - id: '233501'
+                    name: Execution (Di)
+                  - id: '233502'
+                    name: Devil's Curse
+                  - id: '233503'
+                    name: Path to Destruction (Di)
+                  - id: '510895'
+                    name: Power of Chaos (Di)
+                  - id: '510896'
+                    name: Devil's Impact
+            desc: >-
+              Gain 2 uses of Dark Demon Strike (233495), Deflagrating Heat (Di)
+              (233500), Demon's Might (233490), Demon's Solace (233493), Devil's Curse
+              (233502), Devil's Exchange (233496), Devil's Impact (510896), Execution
+              (Di) (233501), Fire and Dark Field (233494), Obliterate (233497),
+              Obliterating Darkness (Di) (233492), Obliterating Flame (Di) (233491),
+              Path to Destruction (Di) (233503) and Power of Chaos (Di) (510895) for
+              one turn
+        type: Ability
+      - id: '510891'
+        name: Triple Obliteration
+        icon: Ability_8.png
+        effects:
+          - effect:
+              multicast:
+                time: 3
+                type: skills
+                skills:
+                  - id: '233490'
+                    name: Demon's Might
+                  - id: '233491'
+                    name: Obliterating Flame (Di)
+                  - id: '233492'
+                    name: Obliterating Darkness (Di)
+                  - id: '233493'
+                    name: Demon's Solace
+                  - id: '233494'
+                    name: Fire and Dark Field
+                  - id: '233495'
+                    name: Dark Demon Strike
+                  - id: '233496'
+                    name: Devil's Exchange
+                  - id: '233497'
+                    name: Obliterate
+                  - id: '233500'
+                    name: Deflagrating Heat (Di)
+                  - id: '233501'
+                    name: Execution (Di)
+                  - id: '233502'
+                    name: Devil's Curse
+                  - id: '233503'
+                    name: Path to Destruction (Di)
+                  - id: '510895'
+                    name: Power of Chaos (Di)
+                  - id: '510896'
+                    name: Devil's Impact
+            desc: >-
+              Gain 3 uses of Dark Demon Strike (233495), Deflagrating Heat (Di)
+              (233500), Demon's Might (233490), Demon's Solace (233493), Devil's Curse
+              (233502), Devil's Exchange (233496), Devil's Impact (510896), Execution
+              (Di) (233501), Fire and Dark Field (233494), Obliterate (233497),
+              Obliterating Darkness (Di) (233492), Obliterating Flame (Di) (233491),
+              Path to Destruction (Di) (233503) and Power of Chaos (Di) (510895) for
+              one turn
+        type: Ability
+      - id: '233500'
+        name: Deflagrating Heat (Di)
+        icon: Ability_21.png
+        effects:
+          - effect:
+              damage:
+                mecanism: magical
+                damageType: mind
+                coef: 12
+                stack: 6
+                maxStack: 6
+                elements:
+                  - fire
+              area: AOE
+              target: ENEMY
+            desc: >-
+              Magic fire damage (12x, MAG) with consecutive damage increase (max. 6
+              times, +6x MAG each, 48x total) to all enemies
+        frames:
+          - 42
+          - 62
+          - 82
+          - 102
+          - 122
+          - 142
+          - 162
+          - 182
+        chainFamily: CWA
+        move: none
+        type: Ability
+        mpCost: 77
         rarity: 7
-        level: 110
-      - id: '230090'
-        name: Power Generator
-        icon: ability_105.png
+        level: 105
+      - id: '233501'
+        name: Execution (Di)
+        icon: Ability_26.png
+        effects:
+          - effect:
+              damage:
+                mecanism: magical
+                damageType: mind
+                coef: 12
+                stack: 6
+                maxStack: 6
+                elements:
+                  - dark
+              area: AOE
+              target: ENEMY
+            desc: >-
+              Magic dark damage (12x, MAG) with consecutive damage increase (max. 6
+              times, +6x MAG each, 48x total) to all enemies
+        frames:
+          - 42
+          - 62
+          - 82
+          - 102
+          - 122
+          - 142
+          - 162
+          - 182
+        chainFamily: CWA
+        move: none
+        type: Ability
+        mpCost: 77
+        rarity: 7
+        level: 105
+      - name: Quadruple Obliteration
+        icon: Ability_8.png
+        effects:
+          - effect:
+              multicast:
+                time: 4
+                type: skills
+                skills:
+                  - id: '233490'
+                    name: Demon's Might
+                  - id: '233491'
+                    name: Obliterating Flame (Di)
+                  - id: '233492'
+                    name: Obliterating Darkness (Di)
+                  - id: '233493'
+                    name: Demon's Solace
+                  - id: '233494'
+                    name: Fire and Dark Field
+                  - id: '233495'
+                    name: Dark Demon Strike
+                  - id: '233496'
+                    name: Devil's Exchange
+                  - id: '233497'
+                    name: Obliterate
+                  - id: '233500'
+                    name: Deflagrating Heat (Di)
+                  - id: '233501'
+                    name: Execution (Di)
+                  - id: '233502'
+                    name: Devil's Curse
+                  - id: '233503'
+                    name: Path to Destruction (Di)
+                  - id: '510895'
+                    name: Power of Chaos (Di)
+                  - id: '510896'
+                    name: Devil's Impact
+            desc: >-
+              Enable unit to use Demon's Might(233490), Obliterating Flame
+              (Di)(233491), Obliterating Darkness (Di)(233492), Demon's
+              Solace(233493), Fire and Dark Field(233494), Dark Demon Strike(233495),
+              Devil's Exchange(233496), Obliterate(233497), Deflagrating Heat
+              (Di)(233500), Execution (Di)(233501), Devil's Curse(233502), Path to
+              Destruction (Di)(233503), Power of Chaos (Di)(510895), Devil's
+              Impact(510896) 4 times in one turn
+        id: unlocked-236986881
+        unlockedBy:
+          - '510892'
+          - '510893'
+      - id: '233502'
+        name: Devil's Curse
+        icon: Ability_105.png
         effects:
           - effect:
               cooldownSkill:
-                id: '509361'
-                name: Power Generator
-                icon: ability_105.png
+                id: '510892'
+                name: Devil's Curse
+                icon: Ability_105.png
                 effects:
                   - effect:
-                      statsBuff:
-                        atk: 250
-                        def: 250
-                        mag: 250
-                        spr: 250
-                      turns: 2
-                      area: SELF
-                      target: SELF
-                    desc: 'Increase ATK, DEF, MAG and SPR by 250% for 2 turns to caster'
+                      break:
+                        spr: 75
+                      turns: 3
+                      area: AOE
+                      target: ENEMY
+                    desc: Reduce SPR by 75% for 3 turns to all enemies
                   - effect:
-                      lbFill:
-                        min: 25
-                        max: 25
-                      area: SELF
-                      target: SELF
-                    desc: Increase LB gauge by 25 to caster
+                      imperil:
+                        fire: 120
+                        dark: 120
+                      turns: 3
+                      area: AOE
+                      target: ENEMY
+                    desc: >-
+                      Reduce resistance to Fire and Dark by 120% for 3 turns to all
+                      enemies
                   - effect:
-                      skillEnhancement:
-                        '230081': 10
-                      turn: 1
-                    desc: Increase damage of Regina Cannon (230081) by 1000% for one turn
-                type: ability
-                mpCost: 84
+                      gainSkills:
+                        turns: 1
+                        skills:
+                          - id: unlocked-236986881
+                            name: Quadruple Obliteration
+                    desc: >-
+                      Gain 4 uses of Dark Demon Strike (233495), Deflagrating Heat
+                      (Di) (233500), Demon's Might (233490), Demon's Solace (233493),
+                      Devil's Curse (233502), Devil's Exchange (233496), Devil's
+                      Impact (510896), Execution (Di) (233501), Fire and Dark Field
+                      (233494), Obliterate (233497), Obliterating Darkness (Di)
+                      (233492), Obliterating Flame (Di) (233491), Path to Destruction
+                      (Di) (233503) and Power of Chaos (Di) (510895) for one turn
+                type: Ability
+                mpCost: 99
               cooldownTurns: 4
               startTurn: 1
-              area: SELF
-              target: SELF
-            desc: 'Unlock Power Generator (509361) on turn 1 [4 turns CD]'
-        type: ability
-        mpCost: 84
+              area: AOE
+              target: ENEMY
+            desc: 'Unlock Devil''s Curse (510892) on turn 1 [4 turns CD]'
+        type: Ability
+        mpCost: 99
         rarity: 7
         level: 110
-      - id: '230091'
-        name: Cana's System
-        icon: ability_105.png
+      - id: '510895'
+        name: Power of Chaos (Di)
+        icon: Ability_63.png
+        effects:
+          - effect:
+              statsBuff:
+                mag: 280
+              turns: 1
+              area: SELF
+              target: SELF
+            desc: Increase MAG by 280% for one turn to caster
+          - effect:
+              skillEnhancement:
+                '233500': 14.5
+                '233501': 14.5
+              turn: 1
+            desc: >-
+              Increase damage of Deflagrating Heat (Di) (233500) and Execution (Di)
+              (233501) by 1450% for one turn
+        type: Ability
+        unlockedBy:
+          - '510893'
+      - id: '510896'
+        name: Devil's Impact
+        icon: Ability_10.png
+        effects:
+          - effect:
+              damage:
+                mecanism: magical
+                damageType: mind
+                coef: 50
+              area: AOE
+              target: ENEMY
+            desc: 'Magic damage (50x, MAG) to all enemies'
+          - effect:
+              imperil:
+                fire: 120
+                dark: 120
+              turns: 3
+              area: AOE
+              target: ENEMY
+            desc: Reduce resistance to Fire and Dark by 120% for 3 turns to all enemies
+        frames:
+          - 42
+          - 62
+          - 82
+          - 102
+          - 122
+          - 142
+          - 162
+          - 182
+        chainFamily: CWA
+        move: none
+        type: Ability
+        mpCost: 80
+        unlockedBy:
+          - '510893'
+      - id: '233503'
+        name: Path to Destruction (Di)
+        icon: Ability_105.png
         effects:
           - effect:
               cooldownSkill:
-                id: '509362'
-                name: Cana's System
-                icon: ability_105.png
+                id: '510893'
+                name: Path to Destruction (Di)
+                icon: Ability_105.png
                 effects:
                   - effect:
-                      noUse: true
+                      killers:
+                        - name: demon
+                          magical: 150
+                        - name: human
+                          magical: 150
+                      turns: 5
                       area: SELF
                       target: SELF
-                    desc: Auto-revive (100% HP) for 2 turns to caster
+                    desc: >-
+                      Increase magic damage against Demons and Humans by 150% to
+                      caster for 5 turns
                   - effect:
-                      lbFill:
-                        min: 25
-                        max: 25
+                      gainSkills:
+                        turns: 3
+                        skills:
+                          - id: unlocked-236986881
+                            name: Quadruple Obliteration
+                    desc: >-
+                      Gain 4 uses of Dark Demon Strike (233495), Deflagrating Heat
+                      (Di) (233500), Demon's Might (233490), Demon's Solace (233493),
+                      Devil's Curse (233502), Devil's Exchange (233496), Devil's
+                      Impact (510896), Execution (Di) (233501), Fire and Dark Field
+                      (233494), Obliterate (233497), Obliterating Darkness (Di)
+                      (233492), Obliterating Flame (Di) (233491), Path to Destruction
+                      (Di) (233503) and Power of Chaos (Di) (510895) for 3 turns
+                  - effect:
+                      gainSkills:
+                        skills:
+                          - id: '510895'
+                            name: Power of Chaos (Di)
+                        turns: 99998
                       area: SELF
                       target: SELF
-                    desc: Increase LB gauge by 25 to caster
+                    desc: Gain Power of Chaos (Di) (510895) (1 use)
                   - effect:
-                      skillEnhancement:
-                        '230081': 10
-                      turn: 1
-                    desc: Increase damage of Regina Cannon (230081) by 1000% for one turn
-                type: ability
-                mpCost: 84
-              cooldownTurns: 4
+                      gainSkills:
+                        skills:
+                          - id: '510896'
+                            name: Devil's Impact
+                        turns: 99998
+                      area: SELF
+                      target: SELF
+                    desc: Gain Devil's Impact (510896) (1 use)
+                type: Ability
+                mpCost: 110
+              cooldownTurns: 7
               startTurn: 1
               area: SELF
               target: SELF
-            desc: 'Unlock Cana''s System (509362) on turn 1 [4 turns CD]'
-        type: ability
-        mpCost: 84
+            desc: 'Unlock Path to Destruction (Di) (510893) on turn 1 [7 turns CD]'
+        type: Ability
+        mpCost: 110
         rarity: 7
         level: 110
-
   - uid: ca76dec5
     name: Gilgamesh (WOTV)
     img: gilgamesh

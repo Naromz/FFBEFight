@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components'
-
+import { nextTurn } from '../actions/globalActions'
 import history from '../history';
 
 
@@ -43,7 +43,7 @@ function ManagementBox(props) {
 
   return (
     <ManagementCont>
-      <Btn>Next Turn</Btn>
+      <Btn onClick={() => props.nextTurn()}>Next Turn</Btn>
       <Btn>Actions</Btn>
       <Btn>Conditions</Btn>
       <Btn>Thresholds</Btn>
@@ -62,7 +62,7 @@ const mapState = state => ({
 
 //THIS FUNCTION IS USED TO MAP ACTIONS TO FUNCTIONS
 const mapDispatch = dispatch => ({
-
+  nextTurn: () => dispatch(nextTurn()),
 });
 
 export default connect(

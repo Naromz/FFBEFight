@@ -117,7 +117,6 @@ function CalcTurnData(data, turnnum, selMove, setSelMove, setCurCond) {
       let curMoves = [];
       let color = 'black';
       if (selMove == move) {
-        console.log(selMove);
         color = 'red';
       }
       let element = data.cond[move];
