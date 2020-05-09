@@ -1,9 +1,11 @@
 
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components'
+
 import { nextTurn } from '../actions/globalActions'
 import history from '../history';
+import Condtions from '../components/Conditions'
 
 
 var ManagementCont = styled.div`
@@ -38,15 +40,36 @@ display:flex;
 align-items:center;
 margin-left: auto;
 `
+var HoverDisp = styled.div`
+display: ${props => props.test};
+position: fixed; 
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%; 
+height: 100%;
+overflow: auto; 
+background-color: rgb(0,0,0); 
+background-color: rgba(0,0,0,0.4); 
+justify-content:center;
+align-items:center;
+`
+
 
 function ManagementBox(props) {
-
+  var [showProp, setShowProp] = useState('none')
+  var [selScreen, setSelScreen] = useState('actions');
   return (
+
     <ManagementCont>
+      <HoverDisp onClick={() => setShowProp('none')} test={showProp}>
+        {selScreen == 'actions' && <Condtions></Condtions>}
+
+      </HoverDisp>
       <Btn onClick={() => props.nextTurn()}>Next Turn</Btn>
-      <Btn>Actions</Btn>
-      <Btn>Conditions</Btn>
-      <Btn>Thresholds</Btn>
+      <Btn onClick={() => { setShowProp('block'); setSelScreen('actions') }}>Actions</Btn>
+      <Btn onClick={() => { setShowProp('block'); setSelScreen('conditions') }}>Conditions</Btn>
+      <Btn onClick={() => { setShowProp('block'); setSelScreen('thresholds') }}>Thresholds</Btn>
 
 
       <TurnBox>Turn: {props.turnNum}</TurnBox>

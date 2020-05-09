@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { alertMessage, sagaStart, modifyCurTurn, setCurCond } from '../actions/globalActions'
 import styled from 'styled-components'
 import shortid from 'shortid'
+import { checkCondition } from '../Services/loadData'
 
 
 var Space = styled.div`
@@ -91,6 +92,7 @@ outline:1px solid gray;
 align-items:center;
 justify-content:center;
 `
+
 function findMove(data, moveid) {
   if (data) {
     let i = 0;
@@ -162,6 +164,15 @@ function CalcTurnData(data, turnnum, selMove, setSelMove, setCurCond) {
 
 
 function App(props) {
+
+  function checkConditionDiv(uid) {
+    if (checkCondition(uid) == true) {
+      return <p>Triggered</p>;
+    }
+    else {
+      return <p>Not Triggered</p>;
+    }
+  }
   const [selMove, setSelMove] = useState(0);
   const [cond, setCond] = useState({ name: '', why: '', active: false, uid: null })
   return (
@@ -173,8 +184,8 @@ function App(props) {
           {CalcTurnData(props.selBoss, props.turnNum, selMove, setSelMove, props.setCurMove)}
         </ActionList>
         <ActionDetails>
-          <ActionDetailHeading >{props.cond?.trigger && JSON.stringify(props.cond.trigger)}</ActionDetailHeading>
-          <ActionCondHeading>Triggered False</ActionCondHeading>
+          <ActionDetailHeading>{props.cond?.trigger && JSON.stringify(props.cond.trigger)}</ActionDetailHeading>
+          <ActionCondHeading>{props.cond && checkConditionDiv(props.cond?.uid)}</ActionCondHeading>
           <ActionCondHeading>{props.cond?.uid && props.cond.uid}</ActionCondHeading>
           {props.cond?.moveData && props.cond?.moveData.map((val, idx) => { return <ActionCondHeading key={idx}>{val.curMove.desc}</ActionCondHeading> })}
         </ActionDetails>

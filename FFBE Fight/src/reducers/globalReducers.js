@@ -1,7 +1,7 @@
 import { GlobalActions } from '../actions/globalActions'
 
 
-export default (state = { loading: true, loadArray: { units: true, bosses: true }, turnNum: 0, curTurn: [], selUnitData: [], selunitplace: 0, turnData: [] }, action) => {
+export default (state = { loading: true, loadArray: { units: true, bosses: true }, turnNum: 1, curTurn: [], selUnitData: [], selunitplace: 0, turnData: [] }, action) => {
 
 
     switch (action.type) {
