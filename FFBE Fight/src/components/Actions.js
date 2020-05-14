@@ -11,7 +11,6 @@ import TableCell from '@material-ui/core/TableCell'
 import { makeStyles } from '@material-ui/core/styles';
 import { parseMoves } from '../Services/loadData';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableBody from '@material-ui/core/TableBody'
 
 
 const useStyles = makeStyles({
@@ -22,7 +21,7 @@ const useStyles = makeStyles({
     overflow: 'auto',
   },
   tableHead: {
-    backgroundColor: 'gray',
+    backgroundColor: 'lightGray',
     outline: '1px solid black',
     boxShadow: '0 1px 4px 0'
   },
@@ -39,26 +38,27 @@ display:flex;
 flex-flow:wrap;
 margin:auto;
 margin-Top:24px;
-background-color:lightgray; 
+background-color:lightgray;
 height:450px;
 overflow: 'auto';
 `
 
-function ConditionstoDivs({ arr }) {
+function ActionsToDivs({ arr }) {
   return arr.map((val, idx) => {
-    return (
-      <TableRow key={idx}>
-        <TableCell >{val.uid}</TableCell>
-        <TableCell >{val.name}</TableCell>
-        <TableCell>{val.trigger}</TableCell>
-        <TableCell >{val.moves}</TableCell>
-        <TableCell>{val.triggered.toString()}</TableCell>
+    return <>
+      <TableRow>
+        <TableCell>{val.eff}</TableCell>
+        <TableCell>{val.type}</TableCell>
+        <TableCell>{val.strength}</TableCell>
+        <TableCell>{val.caster}</TableCell>
+        <TableCell>{val.tar}</TableCell>
+        <TableCell>{val.note}</TableCell>
       </TableRow>
-    )
+    </>
   });
 }
 
-function Conditions(props) {
+function Actions(props) {
 
   const classes = useStyles();
   return (
@@ -69,17 +69,17 @@ function Conditions(props) {
         <Table stickyHeader className={classes.table} aria-label="simple table">
           <TableHead className={classes.tableHead}>
             <TableRow>
-              <TableCell>UID</TableCell>
-              <TableCell align="left">Caster</TableCell>
-              <TableCell align="left">Reason</TableCell>
-              <TableCell align="left">Moves</TableCell>
-              <TableCell align="left">Triggered</TableCell>
+              <TableCell>Action</TableCell>
+              <TableCell align="center">Type</TableCell>
+              <TableCell align="right">Strength</TableCell>
+              <TableCell align="right">Caster</TableCell>
+              <TableCell align="right">Target</TableCell>
+              <TableCell align="right">Note</TableCell>
             </TableRow>
 
           </TableHead>
-          <TableBody>
-            <ConditionstoDivs key={'test'} arr={props.arr} />
-          </TableBody>
+          <ActionsToDivs arr={props.arr} />
+
         </Table>
       </TableContainer>
     </TableCont>
@@ -99,7 +99,7 @@ const mapDispatch = dispatch => ({
 export default connect(
   mapState,
   mapDispatch
-)(Conditions);
+)(Actions);
 
 
 

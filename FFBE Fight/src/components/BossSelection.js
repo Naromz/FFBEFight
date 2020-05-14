@@ -94,7 +94,7 @@ function App(props) {
 
       </BossSelection>
       {props.waveData && <CreateEnemies changeactiveMob={(val) => props.changeActiveMob(val)} enemies={props.waveData?.mobs} />}
-      <NextButtonCont><NextButton>Next Turn</NextButton></NextButtonCont>
+
     </BossHeader >
 
   );

@@ -223,6 +223,11 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
                 selUnitData,
                 selunitplace: 0,
             };
+        case GlobalActions.SET_CUR_ACTIONS:
+            return {
+                ...state,
+                curActions: action.payload
+            }
 
 
         case GlobalActions.SEL_UNIT_PLACE:

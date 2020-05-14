@@ -5,7 +5,11 @@ import styled from 'styled-components'
 
 import { nextTurn } from '../actions/globalActions'
 import history from '../history';
-import Condtions from '../components/Conditions'
+import Actions from './Actions'
+import Conditions from './Conditions'
+import FightControls from './FightControls'
+import { parseMoves, parseConditions } from '../Services/loadData';
+
 
 
 var ManagementCont = styled.div`
@@ -63,14 +67,18 @@ function ManagementBox(props) {
 
     <ManagementCont>
       <HoverDisp onClick={() => setShowProp('none')} test={showProp}>
-        {selScreen == 'actions' && <Condtions></Condtions>}
+        {selScreen == 'actions' && <Actions arr={parseMoves()} />}
+
+        {selScreen == 'conditions' && <Conditions arr={parseConditions()} />}
+
+        {selScreen == 'controls' && <FightControls />}
 
       </HoverDisp>
       <Btn onClick={() => props.nextTurn()}>Next Turn</Btn>
-      <Btn onClick={() => { setShowProp('block'); setSelScreen('actions') }}>Actions</Btn>
+      <Btn onClick={() => { setShowProp('block'); setSelScreen('actions') }}>Team Actions</Btn>
       <Btn onClick={() => { setShowProp('block'); setSelScreen('conditions') }}>Conditions</Btn>
       <Btn onClick={() => { setShowProp('block'); setSelScreen('thresholds') }}>Thresholds</Btn>
-
+      <Btn onClick={() => { setShowProp('block'); setSelScreen('controls') }}>Fight Controls</Btn>
 
       <TurnBox>Turn: {props.turnNum}</TurnBox>
     </ManagementCont>

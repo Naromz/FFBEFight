@@ -15,7 +15,8 @@ export const GlobalActions = {
     SEL_UNIT_PLACE: 'SEL_UNIT_PLACE',
     ADD_ACTIONS: 'ADD_ACTIONS',
     SET_CURCOND: 'SET_CURCOND',
-    NEXT_TURN: 'NEXT_TURN'
+    NEXT_TURN: 'NEXT_TURN',
+    SET_CUR_ACTIONS: 'SET_CUR_ACTIONS'
 };
 
 export const setCurCond = (val) => ({
@@ -77,4 +78,9 @@ export const changeHp = (hp) => ({
 export const nextTurn = () => ({
     type: GlobalActions.NEXT_TURN,
     payload: null
+})
+
+export const updateCurActions = (actions) => ({
+    type: GlobalActions.SET_CUR_ACTIONS,
+    payload: actions
 })

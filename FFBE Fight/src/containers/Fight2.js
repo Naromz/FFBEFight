@@ -7,7 +7,7 @@ import BossSelection from '../components/BossSelection';
 import Info from '../components/Info'
 import UnitHeader from '../components/UnitHeader';
 import UnitSelection from '../components/UnitSelectionBox';
-import loadStuff from '../Services/loadData';
+import loadStuff, { parseMoves } from '../Services/loadData';
 import globalReducers from '../reducers/globalReducers';
 import { changeActiveBoss, addActions } from '../actions/globalActions';
 import yaml from 'js-yaml'
@@ -131,99 +131,6 @@ function App(props) {
       e.preventDefault();
     }
   }
-  function findUnitbyUID(UID, units) {
-    let found = false;
-    let unit;
-    for (let i = 0; i < units.length; i++) {
-      if (units[i].unitData.uuid == UID) {
-        unit = units[i];
-      }
-
-    }
-    return unit;
-  }
-
-  function filterMoves(curTurn) {
-    var arr = [];
-    let i = 0;
-    for (i = 0; i < curTurn.length; i++) {
-
-      arr = arr.concat(filterUnitMoves(curTurn[i]));
-    }
-
-    setArray(arr);
-  }
-
-
-  function filterUnitMoves(move) {
-    if (move?.data) {
-      let newArr = [];
-
-      for (let i = 0; i < move.data.length; i++) {
-        move.data[i].effects.forEach(element => {
-          if (element.effect?.multicast) {
-            newArr.push({
-              note: 'Activate Multicast Skills', tar: 'NA', caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'Multicast'
-            })
-
-          }
-
-          if (element.effect?.imperil) {
-            let imperillvl;
-
-
-            let imperil = 0;
-
-            for (imperil = 0; imperil < Object.entries(element.effect?.imperil).length; imperil++) {
-              let [key, val] = Object.entries(element.effect?.imperil)[imperil];
-              newArr.push({
-                note: key + " " + val, tar: 'ENEMY', caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'Imperil'
-              })
-            }
-
-
-          }
-
-          //Handle Damage Effects
-          if (element.effect?.damage) {
-            if (element.effect?.area == "ST") {
-              if (element?.effect?.damage?.elements) {
-                newArr.push({ note: (element?.effect?.damage?.mecanism + " " + element?.effect?.damage?.coef), caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'ST Damage Elemental ' + element?.effect?.damage?.elements[0].charAt(0).toUpperCase() + element?.effect?.damage?.elements[0].slice(1), tar: props.curMobData?.name })
-              }
-              else {
-                newArr.push({ note: (element?.effect?.damage?.mecanism + " " + element?.effect?.damage?.coef), caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'ST Damage Non-Elemental', tar: props.curMobData?.name })
-              }
-
-            }
-            if (element.effect?.area == "AOE") {
-              if (element?.effect?.damage?.elements) {
-                newArr.push({ note: (element?.effect?.damage?.mecanism + " " + element?.effect?.damage?.coef), caster: findUnitbyUID(move?.uid, props.selUnits).unitData?.name, eff: 'AOE Damage Elemental ' + element?.effect?.damage?.elements[0].charAt(0).toUpperCase() + element?.effect?.damage?.elements[0].slice(1), tar: 'aoe' })
-              }
-              else {
-                newArr.push({ note: (element?.effect?.damage?.mecanism + " " + element?.effect?.damage?.coef), caster: findUnitbyUID(move?.uid, props.selUnits).unitData?.name, eff: 'AOE Damage Non-Elemental', tar: 'aoe' })
-              }
-
-            }
-          }
-
-          //Handle Resist Effects
-          if (element.effect?.resist) {
-            if (element.effect?.area == "AOE") {
-              newArr.push({ note: (element?.effect?.resist[0].percent), caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'AOE Resistance ' + element?.effect?.resist[0].name.charAt(0).toUpperCase() + element?.effect?.resist[0].name.slice(1), tar: 'Allies', turns: element?.effect?.turns })
-            }
-            else {
-              //newArr.push({ caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'ST Damage Non-Elemental', tar: props.curMobData?.name })
-            }
-
-          }
-
-        });
-      }
-
-      return newArr;
-    }
-
-  }
   const upHandler = (e) => {
     if (e.keyCode == 112) {
       e.preventDefault();
@@ -234,16 +141,7 @@ function App(props) {
 
         setShowActions('none');
       }
-      filterMoves(props.turnData);
-
-      // console.log(searchdeep(props.turnData));
-      // var keyList = getKeys(props.turnData[0].data);
-      // var data = [];
-      // for (let i = 0; i < keyList.length; i++) {
-      //   data.push({ uid: i, data: getKeys(props.turnData[0].data[keyList[i]]) });
-
-      // }
-      // setStateYaml(yaml.dump(data));
+      setArray(parseMoves());
     }
     if (e.key === 'a') {
       setStateYaml(yaml.dump(props.state));
@@ -300,7 +198,6 @@ function App(props) {
         }
         <ManagementBox></ManagementBox>
 
-        {/* <ExportString value={stateyaml}></ExportString> */}
       </ContainAllCont>
     </Content >
   );

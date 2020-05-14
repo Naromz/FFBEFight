@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import numeral from 'numeral';
 import { modifyCurTurn } from '../actions/globalActions'
-
+import { UpdateActions } from '../Services/loadData'
 
 var MoveBoxCont = styled.div`
 width:28px;
@@ -122,7 +122,7 @@ function GetUnitMoves({ unitData, setMoveData, uid }) {
   if (unitData) {
 
     return unitData.map((val, idx) =>
-      <MoveBoxCont onClick={() => setMoveData(val, uid)} key={idx}>
+      <MoveBoxCont onClick={() => { setMoveData(val, uid); UpdateActions() }} key={idx}>
         <MoveImg key={idx} src={require(`../resources/images/Moves/${val.icon}`)} />
       </MoveBoxCont>);
   }

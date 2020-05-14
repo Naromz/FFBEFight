@@ -5,7 +5,7 @@ import Axios from 'axios';
 
 function* bossSaga(action) {
     try {
-        const response = yield call(Axios.post, `http://codinghaze.com:3005/getbosses`);
+        const response = yield call(Axios.post, `http://localhost:3005/getbosses`);
 
         yield put({
             type: GlobalActions.LOADBOSSES.SUCCESS,

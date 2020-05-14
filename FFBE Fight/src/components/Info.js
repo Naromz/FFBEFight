@@ -122,26 +122,27 @@ function CalcTurnData(data, turnnum, selMove, setSelMove, setCurCond) {
         color = 'red';
       }
       let element = data.cond[move];
-      if (element.trigger.type == 'turn') {
-
-        let curMoveData = [];
-
-        for (let i = 0; i < element.moves.length; i++) {
 
 
-          let curMove = findMove(data.moves, element.moves[i].uid);
-          curMoves.push({ curMove });
 
-          if (element.moves.length == 1) {
-            curMoveData.push(curMove.name);
-          }
-          else {
-            curMoveData.push(curMove.name + ", ");
-          }
+      let curMoveData = [];
 
+      for (let i = 0; i < element.moves.length; i++) {
+
+
+        let curMove = findMove(data.moves, element.moves[i].uid);
+        curMoves.push({ curMove });
+
+        if (element.moves.length == 1) {
+          curMoveData.push(curMove.name);
         }
-        moveData.push(<ActionDiv onClick={() => { setCurCond({ ...data.cond[move], moveData: curMoves }); setSelMove(move); }} color={color} key={element.uid}>{(curMoveData)}</ActionDiv>)
+        else {
+          curMoveData.push(curMove.name + ", ");
+        }
+
       }
+      moveData.push(<ActionDiv onClick={() => { setCurCond({ ...data.cond[move], moveData: curMoves }); setSelMove(move); }} color={color} key={element.uid}>{(curMoveData)}</ActionDiv>)
+
     }
 
     // return data.cond.map((val, idx) => {
@@ -177,7 +178,7 @@ function App(props) {
   const [cond, setCond] = useState({ name: '', why: '', active: false, uid: null })
   return (
     <Space>
-      <HeadingBox>Actions</HeadingBox>
+      <HeadingBox>Enemy Actions</HeadingBox>
       {/* <ActionsBox>{CalcTurnData(props.selBoss, props.turnNum)}</ActionsBox> */}
       <ActionsBox>
         <ActionList>
