@@ -78,7 +78,7 @@ function ManagementBox(props) {
       <Btn onClick={() => { setShowProp('block'); setSelScreen('actions') }}>Team Actions</Btn>
       <Btn onClick={() => { setShowProp('block'); setSelScreen('conditions') }}>Conditions</Btn>
       <Btn onClick={() => { setShowProp('block'); setSelScreen('thresholds') }}>Thresholds</Btn>
-      <Btn onClick={() => { setShowProp('block'); setSelScreen('controls') }}>Fight Controls</Btn>
+      {/* <Btn onClick={() => { setShowProp('block'); setSelScreen('controls') }}>Fight Controls</Btn> */}
 
       <TurnBox>Turn: {props.turnNum}</TurnBox>
     </ManagementCont>

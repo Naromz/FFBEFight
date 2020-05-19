@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { alertMessage, sagaStart, modifyCurTurn, setCurCond } from '../actions/globalActions'
 import styled from 'styled-components'
@@ -165,7 +165,9 @@ function CalcTurnData(data, turnnum, selMove, setSelMove, setCurCond) {
 
 
 function App(props) {
+  useEffect(() => {
 
+  }, [])
   function checkConditionDiv(uid) {
     if (checkCondition(uid) == true) {
       return <p>Triggered</p>;

@@ -1,0 +1,54 @@
+- id: 702r0094
+  name: Need to finish adding move types.
+  priority: High
+  assignedto: Zach
+  startdate: xxx
+  perco: 45
+- id: 4db0d362
+  name: Need to redesign and redo ui
+  priority: Medium
+  assignedto: Zach
+  perco: 0
+  startdate: xxx
+- id: b77c4252
+  name: Test all units etc.
+  priority: Medium
+  assignedto: Zach
+  perco: 0
+  startdate: xxx
+- id: b94bd6a5
+  name: Redesign root system to include other info
+  priority: Medium
+  startdate: xxx
+  perco: 0
+  assignedto: Zach
+- id: ca2ed035
+  name: Finsih Equipment Code
+  priority: Low
+  perco: 0
+  assignedto: Zach
+  startdate: xxx
+- id: 5552c046
+  name: Add more utility functionality
+  priority: Low
+  assignedto: Zach
+  perco: 0
+  startdate: xxx
+- id: 2642fa74
+  name: Add small images to show unit selection
+  priority: Medium
+  assignedto: Zach
+  startdate: xxx
+  perco: 0
+- id: 4ce83792
+  name: Create Dev Server and etc
+  priority: XXX
+  assignedto: Zach
+  startdate: 5/17
+  perco: 100
+- id: 8518f1b2
+  name: Add finsihed items to AI List
+  priority: XXX
+  assignedto: Zach
+  startdate: 5/17
+  perco: 100

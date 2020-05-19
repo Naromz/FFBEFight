@@ -211,6 +211,29 @@ height:32px;
 outline:1px solid black;
 
 `
+
+var HalfBox = styled.div`
+width:50%;
+height:100%;
+outline:1px solid black;
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+align-items:center;
+justify-content:center;
+`
+
+var TextAreaEquip = styled.textarea`
+width:90%;
+height:90%;
+resize: none;
+`
+var LoadEquipBtn = styled.button`
+width:60px;
+height:35px;
+outline:1px solid black;
+background-color:lightgray;
+`
 function GetUnits({ unitData }) {
   return unitData.map((val, idx) =>
     <option key={idx} value={idx}>
@@ -276,6 +299,7 @@ function App(props) {
   var [selUnitIdx, setSelUnitIdx] = useState(0);
   var [moveName, setMoveName] = useState('');
   var [moveDesc, setMoveDesc] = useState('');
+  var [equipString, setEquipString] = useState('');
   var [unitName, setUnitName] = useState('none');
 
   useEffect(() => {
@@ -295,7 +319,7 @@ function App(props) {
         <HoverDispCont>
           <UnitSelectionSide>
             <UnitImageCont>
-              <UnitSelectionDetailImgCont>{props.unitData?.units[selUnitIdx]?.fullimg && <UnitSelectionDisplayImg src={require(`../resources/images/Units/${props.unitData.units[selUnitIdx].fullimg}.png`)} />}</UnitSelectionDetailImgCont>
+              <UnitSelectionDetailImgCont>{props.unitData?.units[selUnitIdx]?.fullImg && <UnitSelectionDisplayImg src={require(`../resources/images/Units/${props.unitData.units[selUnitIdx].fullImg}.png`)} />}</UnitSelectionDetailImgCont>
             </UnitImageCont>
             <UnitInputCont>
               <UnitInput selectedIndex={selUnitIdx} value={unitName} onChange={(evt) => { setMoveName(''); setMoveDesc(''); setUnitName(evt.target.val); setSelUnitIdx(evt.target.value); }}>
@@ -313,17 +337,21 @@ function App(props) {
 
             </FullLengthBox>
             <FullLengthBox>
-              <StatsBoxCont>HP : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats[0]?.maxStats?.hp)}</StatsBoxCont>
-              <StatsBoxCont>MP : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats[0]?.maxStats?.mp)}</StatsBoxCont>
-              <StatsBoxCont>ATK : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats[0]?.maxStats?.atk)}</StatsBoxCont>
+              <StatsBoxCont>HP : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats?.maxStats?.hp)}</StatsBoxCont>
+              <StatsBoxCont>MP : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats?.maxStats?.mp)}</StatsBoxCont>
+              <StatsBoxCont>ATK : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats?.maxStats?.atk)}</StatsBoxCont>
             </FullLengthBox>
+
+
             <FullLengthBox>
-              <StatsBoxCont>DEF : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats[0]?.maxStats?.def)}</StatsBoxCont>
-              <StatsBoxCont>SPR : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats[0]?.maxStats?.spr)}</StatsBoxCont>
-              <StatsBoxCont>MAG : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats[0]?.maxStats?.mag)}</StatsBoxCont>
+              <StatsBoxCont>DEF : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats?.maxStats?.def)}</StatsBoxCont>
+              <StatsBoxCont>SPR : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats?.maxStats?.spr)}</StatsBoxCont>
+              <StatsBoxCont>MAG : {props.unitData?.units[selUnitIdx]?.stats && JSON.stringify(props.unitData?.units[selUnitIdx]?.stats?.maxStats?.mag)}</StatsBoxCont>
             </FullLengthBox>
             <FullLengthBox style={{ height: '48px', }}>
-              EQUIP: COMING SOON
+              <HalfBox><LoadEquipBtn onClick={() => { alert(equipString) }}>Load Equip</LoadEquipBtn></HalfBox>
+              <HalfBox><TextAreaEquip value={equipString} onChange={(evt) => setEquipString(evt.target.value)}></TextAreaEquip></HalfBox>
+
             </FullLengthBox>
             <FullLengthBox>
               <NameBoxCont>Moves</NameBoxCont>

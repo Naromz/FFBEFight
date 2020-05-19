@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components'
-
+import { startFixesLoad } from '../actions/globalActions'
 import history from '../history';
 
 
@@ -44,9 +44,10 @@ function Header(props) {
       <HeaderLogo><div>FFBE Fight</div></HeaderLogo>
       <HeaderLinkContainer>
         <HeaderLink onClick={() => history.push('/fight')}>Fight</HeaderLink>
-        <HeaderLink onClick={() => history.push('/units')}>Units</HeaderLink>
-        <HeaderLink onClick={() => history.push('/directory')}>Directory</HeaderLink>
-        <HeaderLink onClick={() => history.push('/about')}>About</HeaderLink>
+
+        <HeaderLink onClick={() => { history.push('/fixes'); props.loadFixes() }}>TO DO</HeaderLink>
+
+        <HeaderLink onClick={() => history.push('/issues')}>Submit Issue</HeaderLink>
       </HeaderLinkContainer>
     </HeaderContainer>
   );
@@ -59,7 +60,7 @@ const mapState = state => ({
 
 //THIS FUNCTION IS USED TO MAP ACTIONS TO FUNCTIONS
 const mapDispatch = dispatch => ({
-
+  loadFixes: () => dispatch(startFixesLoad()),
 });
 
 export default connect(

@@ -4,7 +4,10 @@ import { Provider } from 'react-redux';
 import store from './store';
 import App from './App';
 import history from './history';
+import Fixes from './containers/Fixes'
 import Fight from './containers/Fight2'
+
+import Issues from './containers/Issues'
 import {
     Router,
     Switch,
@@ -23,23 +26,19 @@ class Main extends Component {
         return (
             <Provider store={store}>
                 <Router history={history}>
-                    {/* <Header /> */}
+                    <Header />
                     <Switch>
                         <Route path="/fight">
                             <Fight />
                         </Route>
                         <Route exact path="/">
                             <Fight />
-                            {/* <h1>test</h1> */}
                         </Route>
-                        <Route path="/units">
-                            <h1>units</h1>
+                        <Route path="/fixes">
+                            <Fixes />
                         </Route>
-                        <Route path="/directory">
-                            <h1>directory</h1>
-                        </Route>
-                        <Route path="/about">
-                            <h1>about</h1>
+                        <Route path="/issues">
+                            <Issues />
                         </Route>
 
                     </Switch>

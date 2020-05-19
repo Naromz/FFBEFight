@@ -108,6 +108,8 @@ export function checkCondition(uid, mobid) {
   let curWave = curState.globalReducer.curWaveData;
   let curMob;
   let curActions = curState.globalReducer.curActions;
+  let targeted = false;
+
 
   if (mobid) {
     let mobIdx = 0;
@@ -152,7 +154,18 @@ export function checkCondition(uid, mobid) {
         let actionIdx = 0;
         if (curActions) {
           for (actionIdx = 0; actionIdx < curActions.length; actionIdx++) {
-            if (curActions[actionIdx].note == "magical" && (curActions[actionIdx].tar == 'aoe' || curActions[actionIdx].tar == curMob.name)) {
+            if ((curActions[actionIdx].note == "magical" && curActions[actionIdx].tar == 'aoe') || (curActions[actionIdx].tar == curMob.name && curActions[actionIdx].note == "magical")) {
+              conditionTrue = true;
+            }
+          }
+        }
+      }
+      if (curConditions[i].trigger.type == 'physdmg') {
+        let found = false;
+        let actionIdx = 0;
+        if (curActions) {
+          for (actionIdx = 0; actionIdx < curActions.length; actionIdx++) {
+            if ((curActions[actionIdx].note == "physical" && curActions[actionIdx].tar == 'aoe') || (curActions[actionIdx].tar == curMob.name && curActions[actionIdx].note == "physical")) {
               conditionTrue = true;
             }
           }
