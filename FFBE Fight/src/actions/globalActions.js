@@ -19,6 +19,7 @@ export const GlobalActions = {
     SET_CUR_ACTIONS: 'SET_CUR_ACTIONS',
     LOAD_FIXES: { START: 'LOADFIXESSTART', SUCCESS: 'LOADFIXESGOOD', FAIL: 'LOADFIXESBAD' },
     WRITEISSUE: { START: 'WISTART', SUCCESS: 'WIGOOD', FAIL: 'WIBAD' },
+    LOAD_UPDATES: { START: 'UPDATESTART', SUCCESS: 'UPDATEGOOD', FAIL: 'UPDATEBAD' },
 };
 
 export const setCurCond = (val) => ({
@@ -90,6 +91,11 @@ export const updateCurActions = (actions) => ({
 export const startFixesLoad = () => ({
     payload: null,
     type: GlobalActions.LOAD_FIXES.START,
+})
+
+export const startUpdatesLoad = () => ({
+    payload: null,
+    type: GlobalActions.LOAD_UPDATES.START,
 })
 
 export const writeIssue = (msg) => ({

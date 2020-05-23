@@ -5,6 +5,7 @@ const fs = require('fs');
 const yaml = require('js-yaml')
 
 const mysql = require('mysql2');
+const path = require('path');
 
 
 var cors = require('cors')
@@ -47,20 +48,41 @@ app.post('/writeIssue', async (req, res) => {
 })
 
 app.post('/getbosses', async (req, res) => {
-  res.send(await yaml.load(fs.readFileSync("./Bosses.yaml", (err) => { console.log(err) })));
+  res.send(await yaml.load(fs.readFileSync(path.join(__dirname + `/serve/Bosses.yaml`), (err) => { console.log(err) })));
 });
 
 app.post('/getFixes', async (req, res) => {
-  res.send(await yaml.load(fs.readFileSync("./Fixes.yaml", (err) => { console.log(err) })));
+  res.send(await yaml.load(fs.readFileSync(path.join(__dirname + `/serve/Fixes.yaml`), (err) => { console.log(err) })));
 });
 
 app.post('/getunits', async (req, res) => {
-  res.send(await yaml.load(fs.readFileSync("./unitsparsed.yaml", (err) => { nconsole.log(err) })));
+  res.send(await yaml.load(fs.readFileSync(path.join(__dirname + `/serve/unitsparsed.yaml`), (err) => { nconsole.log(err) })));
+});
+
+app.post('/getupdates', async (req, res) => {
+  res.send(await yaml.load(fs.readFileSync(path.join(__dirname + `/serve/Updates.yaml`), (err) => { nconsole.log(err) })));
 });
 
 app.post('/geteffects', async (req, res) => {
-  res.send(await yaml.load(fs.readFileSync("./Effects.yaml", (err) => { console.log(err) })));
+  res.send(await yaml.load(fs.readFileSync(path.join(__dirname + `/serve/Effects.yaml`), (err) => { console.log(err) })));
 });
+
+app.get('/images/type/:type/name/:name', async function (req, res) {
+  console.log(req.params);
+
+  if (req.params.type === 'res') {
+    res.sendFile(path.join(__dirname + `/serve/Images/Resistances/${req.params.name}.png`))
+  }
+  else if (req.params.type === 'boss') {
+    res.sendFile(path.join(__dirname + `/serve/Images/Bosses/${req.params.name}.png`))
+  }
+  else if (req.params.type === 'unit') {
+    res.sendFile(path.join(__dirname + `/serve/Images/Units/${req.params.name}`))
+  }
+  else {
+    res.send("error");
+  }
+})
 
 app.get('/', (req, res) => res.send('Hello World!'))
 

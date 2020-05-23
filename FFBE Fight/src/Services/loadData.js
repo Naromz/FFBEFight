@@ -13,7 +13,7 @@ export function UpdateActions() {
 
 function findUnitbyUID(UID) {
 
-  let state = store.getState();
+  let state = { ...store.getState() };
   let units = state.globalReducer.selUnitData;
   let found = false;
   let unit;
@@ -27,7 +27,7 @@ function findUnitbyUID(UID) {
 }
 
 function parseMove(move) {
-  let state = store.getState();
+  let state = { ...store.getState() };
   let curMobData = state.globalReducer.curMob;
 
   if (move?.data) {
@@ -106,26 +106,25 @@ export function checkCondition(uid, mobid) {
 
   let curState = store.getState();
   let curWave = curState.globalReducer.curWaveData;
-  let curMob;
+  let curMobData = curState.globalReducer.curMob;
   let curActions = curState.globalReducer.curActions;
   let targeted = false;
+  console.log(curActions);
+
 
 
   if (mobid) {
     let mobIdx = 0;
 
     for (mobIdx = 0; mobIdx < curWave.mobs.length; mobIdx++) {
-      curWave.mobs[mobIdx].uid = mobid;
-      curMob = curWave.mobs[mobIdx];
+
+
+      curMobData = curWave.mobs[mobIdx];
     }
 
   }
-  else {
 
-    curMob = curState.globalReducer.curMob;
-  }
-
-  let curConditions = curMob.cond;
+  let curConditions = curMobData.cond;
   let turn = curState.globalReducer.turnNum;
   let conditionTrue = false;
   let i = 0;
@@ -150,12 +149,16 @@ export function checkCondition(uid, mobid) {
         }
       }
       if (curConditions[i].trigger.type == 'magdmg') {
+        console.log('Cond Found ')
+
         let found = false;
         let actionIdx = 0;
         if (curActions) {
+          console.log(curActions[actionIdx]);
           for (actionIdx = 0; actionIdx < curActions.length; actionIdx++) {
-            if ((curActions[actionIdx].note == "magical" && curActions[actionIdx].tar == 'aoe') || (curActions[actionIdx].tar == curMob.name && curActions[actionIdx].note == "magical")) {
+            if ((curActions[actionIdx].note == "magical" && curActions[actionIdx].tar == 'aoe')) {
               conditionTrue = true;
+              console.log('triggered');
             }
           }
         }
@@ -165,7 +168,7 @@ export function checkCondition(uid, mobid) {
         let actionIdx = 0;
         if (curActions) {
           for (actionIdx = 0; actionIdx < curActions.length; actionIdx++) {
-            if ((curActions[actionIdx].note == "physical" && curActions[actionIdx].tar == 'aoe') || (curActions[actionIdx].tar == curMob.name && curActions[actionIdx].note == "physical")) {
+            if ((curActions[actionIdx].note == "physical" && curActions[actionIdx].tar == 'aoe')) {
               conditionTrue = true;
             }
           }
@@ -180,14 +183,14 @@ export function checkCondition(uid, mobid) {
 
 
 function findMove(moveid, mobid) {
-  let curState = store.getState();
+  let curState = { ...store.getState() };
   let curWave = curState.globalReducer.curWaveData;
 
   let mobIdx = 0;
   let mob;
 
   for (mobIdx = 0; mobIdx < curWave.mobs.length; mobIdx++) {
-    curWave.mobs[mobIdx].uid = mobid;
+    // curWave.mobs[mobIdx].uid = mobid;
     mob = curWave.mobs[mobIdx];
   }
 
@@ -210,7 +213,7 @@ function findMove(moveid, mobid) {
 
 
 export function parseMoves() {
-  let state = store.getState();
+  let state = { ...store.getState() };
   let curTurn = state.globalReducer.curTurn;
 
 
@@ -229,7 +232,7 @@ export function parseMoves() {
 
 export function parseConditions() {
 
-  let state = store.getState();
+  let state = { ...store.getState() };
   let curWave = state.globalReducer.curWaveData;
   let mobs = curWave.mobs;
 
@@ -247,6 +250,7 @@ export function parseConditions() {
       condition.trigger = JSON.stringify(mobs[i].cond[cond].trigger);
       condition.moves = findMove(mobs[i].cond[cond].moves[0].uid, mobs[i].uid).name;
       condition.name = mobs[i].name;
+      condition.desc = mobs[i].desc;
       condition.triggered = checkCondition(mobs[i].cond[cond].uid, mobs[i].uid)
 
       conditionList.push(condition);

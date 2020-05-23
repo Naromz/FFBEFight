@@ -15,6 +15,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "js-yaml": "^3.13.1",
-    "mysql2": "^2.1.0"
+    "mysql2": "^2.1.0",
+    "typeface-roboto": "0.0.75"
   }
 }

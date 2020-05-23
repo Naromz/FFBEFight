@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import numeral from 'numeral';
 import { modifyCurTurn } from '../actions/globalActions'
 import { UpdateActions } from '../Services/loadData'
+import { serverAddress } from '../sources'
 
 var MoveBoxCont = styled.div`
 width:28px;
@@ -139,7 +140,7 @@ function App(props) {
   }, [])
   return (
     <UnitData>
-      <UnitImageCont>{findUnitData(props.unitData, props.selUnit) && <img src={require(`../resources/images/Units/${findUnitData(props.unitData, props.selUnit).fullImg}.png`)}></img>} </UnitImageCont>
+      <UnitImageCont>{findUnitData(props.unitData, props.selUnit) && <img src={serverAddress() + `/images/type/unit/name/${findUnitData(props.unitData, props.selUnit).fullImg}`}></img>} </UnitImageCont>
       <UnitStuffCont>
         <FullRow ><NameBox>{findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).name}</NameBox>
           <StatBox>HP {findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).stats.maxStats.hp}</StatBox>
@@ -148,7 +149,7 @@ function App(props) {
           <StatBox>SPR {findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).stats.maxStats.spr}</StatBox>
           <StatBox>MAG {findUnitData(props.unitData, props.selUnit) && findUnitData(props.unitData, props.selUnit).stats.maxStats.mag}</StatBox>
         </FullRow>
-        <MovesCont>{findUnitMoves(props.curTurn, props.selUnit) ? findUnitMoves(props.curTurn, props.selUnit) : JSON.stringify(selMove)} </MovesCont>
+        <MovesCont>{findUnitMoves(props.curTurn, props.selUnit) ? findUnitMoves(props.curTurn, props.selUnit) : selMove} </MovesCont>
         <MovesCont>{findUnitData(props.unitData, props.selUnit) && <GetUnitMoves setSelMove={(val) => setSelMove(val)} uid={findUnitData(props.unitData, props.selUnit).uuid} setMoveData={(val, uid) => props.modifyCurTurn(props.selUnit, val, uid)} unitData={findUnitData(props.unitData, props.selUnit).moves} />}</MovesCont>
       </UnitStuffCont>
     </UnitData>

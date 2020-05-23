@@ -1,0 +1,8 @@
+- update: 409afe11
+  desc: Added new updates tab
+  fixnum: none
+  compdate: 5/18
+- update: 6d40c218
+  desc: Fixed the GL exclusive moves
+  fixnum: none
+  compdate: 5/18

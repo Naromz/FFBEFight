@@ -80,7 +80,7 @@ var CreateSelection = ({ selections }) => {
 var CreateEnemies = ({ enemies, changeactiveMob }) => {
   return enemies.map((val, idx) => {
     return (
-      <BossBox color={val.hp > 0 ? 'white' : 'red'} onClick={() => { val.hp > 0 && changeactiveMob(val.uid) }} key={idx}><BossIcon src={require(`../resources/images/${val.img}.png`)} /></BossBox>)
+      <BossBox color={val.hp > 0 ? 'white' : 'red'} onClick={() => { val.hp > 0 && (changeactiveMob(val.uid) && console.log(val.uid)) }} key={idx}><BossIcon src={require(`../resources/images/${val.img}.png`)} /></BossBox>)
   });
 
 
@@ -90,7 +90,7 @@ function App(props) {
   return (
     <BossHeader>
       <BossSelection>
-        <SelectionInput onChange={(evt) => props.changeActiveBoss(evt.target.value)}><CreateSelection selections={props.options} /></SelectionInput>
+        {/* <SelectionInput onChange={(evt) => props.changeActiveBoss(evt.target.value)}><CreateSelection selections={props.options} /></SelectionInput> */}
 
       </BossSelection>
       {props.waveData && <CreateEnemies changeactiveMob={(val) => props.changeActiveMob(val)} enemies={props.waveData?.mobs} />}
@@ -102,7 +102,7 @@ function App(props) {
 }
 //THIS FUNCTION MAPS STORE TO STATE
 const mapState = state => ({
-
+  waveData: state.globalReducer.curWaveData,
 });
 
 

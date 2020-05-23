@@ -6,6 +6,7 @@ import numeral from 'numeral';
 import { selectUnit, changeSelectUnitPlace } from '../actions/globalActions'
 import globalReducers from '../reducers/globalReducers';
 
+import { serverAddress } from '../sources'
 
 var UnitData = styled.div`
 width:800px;
@@ -307,19 +308,19 @@ function App(props) {
   }, [])
   return (
     <UnitData>
-      <UnitBox key={0} onClick={() => { if (!CheckUnitData(props.selUnitData, 0)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(0); props.changeSelectUnitPlace(0); }}>{CheckUnitData(props.selUnitData, 0) ? <><UnitSelectionImg src={require(`../resources/images/Units/${findUnitData(props.selUnitData, 0).img}.png`)} /> <MoveBox turnData={props.turnData} selUnit={0} /> </> : <h3>Select</h3>}</UnitBox>
-      <UnitBox key={1} onClick={() => { if (!CheckUnitData(props.selUnitData, 1)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(1); props.changeSelectUnitPlace(1); }}>{CheckUnitData(props.selUnitData, 1) ? <><UnitSelectionImg src={require(`../resources/images/Units/${findUnitData(props.selUnitData, 1).img}.png`)} /><MoveBox turnData={props.turnData} selUnit={1} /> </> : <h3>Select</h3>}</UnitBox>
-      <UnitBox key={2} onClick={() => { if (!CheckUnitData(props.selUnitData, 2)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(2); props.changeSelectUnitPlace(2); }}>{CheckUnitData(props.selUnitData, 2) ? <><UnitSelectionImg src={require(`../resources/images/Units/${findUnitData(props.selUnitData, 2).img}.png`)} /><MoveBox turnData={props.turnData} selUnit={2} /> </> : <h3>Select</h3>}</UnitBox>
-      <UnitBox key={3} onClick={() => { if (!CheckUnitData(props.selUnitData, 3)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(3); props.changeSelectUnitPlace(3); }}>{CheckUnitData(props.selUnitData, 3) ? <><UnitSelectionImg src={require(`../resources/images/Units/${findUnitData(props.selUnitData, 3).img}.png`)} /><MoveBox turnData={props.turnData} selUnit={3} /> </> : <h3>Select</h3>}</UnitBox>
-      <UnitBox key={4} onClick={() => { if (!CheckUnitData(props.selUnitData, 4)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(4); props.changeSelectUnitPlace(4); }}>{CheckUnitData(props.selUnitData, 4) ? <><UnitSelectionImg src={require(`../resources/images/Units/${findUnitData(props.selUnitData, 4).img}.png`)} /> <MoveBox turnData={props.turnData} selUnit={4} /> </> : <h3>Select</h3>}</UnitBox>
-      <UnitBox key={5} onClick={() => { if (!CheckUnitData(props.selUnitData, 5)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(5); props.changeSelectUnitPlace(5); }}>{CheckUnitData(props.selUnitData, 5) ? <><UnitSelectionImg src={require(`../resources/images/Units/${findUnitData(props.selUnitData, 5).img}.png`)} /> <MoveBox turnData={props.turnData} selUnit={5} /> </> : <h3>Select</h3>}</UnitBox>
+      <UnitBox key={0} onClick={() => { if (!CheckUnitData(props.selUnitData, 0)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(0); props.changeSelectUnitPlace(0); }}>{CheckUnitData(props.selUnitData, 0) ? <><UnitSelectionImg src={`${serverAddress()}/images/type/unit/name/${findUnitData(props.selUnitData, 0).icon}`} /> <MoveBox turnData={props.turnData} selUnit={0} /> </> : <h3>Select</h3>}</UnitBox>
+      <UnitBox key={1} onClick={() => { if (!CheckUnitData(props.selUnitData, 1)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(1); props.changeSelectUnitPlace(1); }}>{CheckUnitData(props.selUnitData, 1) ? <><UnitSelectionImg src={`${serverAddress()}/images/type/unit/name/${findUnitData(props.selUnitData, 1).icon}`} /><MoveBox turnData={props.turnData} selUnit={1} /> </> : <h3>Select</h3>}</UnitBox>
+      <UnitBox key={2} onClick={() => { if (!CheckUnitData(props.selUnitData, 2)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(2); props.changeSelectUnitPlace(2); }}>{CheckUnitData(props.selUnitData, 2) ? <><UnitSelectionImg src={`${serverAddress()}/images/type/unit/name/${findUnitData(props.selUnitData, 2).icon}`} /><MoveBox turnData={props.turnData} selUnit={2} /> </> : <h3>Select</h3>}</UnitBox>
+      <UnitBox key={3} onClick={() => { if (!CheckUnitData(props.selUnitData, 3)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(3); props.changeSelectUnitPlace(3); }}>{CheckUnitData(props.selUnitData, 3) ? <><UnitSelectionImg src={`${serverAddress()}/images/type/unit/name/${findUnitData(props.selUnitData, 3).icon}`} /><MoveBox turnData={props.turnData} selUnit={3} /> </> : <h3>Select</h3>}</UnitBox>
+      <UnitBox key={4} onClick={() => { if (!CheckUnitData(props.selUnitData, 4)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(4); props.changeSelectUnitPlace(4); }}>{CheckUnitData(props.selUnitData, 4) ? <><UnitSelectionImg src={`${serverAddress()}/images/type/unit/name/${findUnitData(props.selUnitData, 4).icon}`} /> <MoveBox turnData={props.turnData} selUnit={4} /> </> : <h3>Select</h3>}</UnitBox>
+      <UnitBox key={5} onClick={() => { if (!CheckUnitData(props.selUnitData, 5)) { setShowProp('block'); setSelUnitIdx(0); setUnitName('none'); } setSelUnitSpot(5); props.changeSelectUnitPlace(5); }}>{CheckUnitData(props.selUnitData, 5) ? <><UnitSelectionImg src={`${serverAddress()}/images/type/unit/name/${findUnitData(props.selUnitData, 5).icon}`} /> <MoveBox turnData={props.turnData} selUnit={5} /> </> : <h3>Select</h3>}</UnitBox>
 
 
       <HoverDisp test={showProp}>
         <HoverDispCont>
           <UnitSelectionSide>
             <UnitImageCont>
-              <UnitSelectionDetailImgCont>{props.unitData?.units[selUnitIdx]?.fullImg && <UnitSelectionDisplayImg src={require(`../resources/images/Units/${props.unitData.units[selUnitIdx].fullImg}.png`)} />}</UnitSelectionDetailImgCont>
+              <UnitSelectionDetailImgCont>{props.unitData?.units[selUnitIdx]?.fullImg && <UnitSelectionDisplayImg src={serverAddress() + `/images/type/unit/name/${props.unitData.units[selUnitIdx].icon}`} ></UnitSelectionDisplayImg>}</UnitSelectionDetailImgCont>
             </UnitImageCont>
             <UnitInputCont>
               <UnitInput selectedIndex={selUnitIdx} value={unitName} onChange={(evt) => { setMoveName(''); setMoveDesc(''); setUnitName(evt.target.val); setSelUnitIdx(evt.target.value); }}>

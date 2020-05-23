@@ -13,6 +13,7 @@ import { changeActiveBoss, addActions } from '../actions/globalActions';
 import yaml from 'js-yaml'
 import ManagementBox from '../components/ManagementBox'
 import searchdeep from '../Services/searchDeep';
+import BossHeader2 from '../components/BossHeader2'
 
 
 var HoverDisp = styled.div`
@@ -189,9 +190,10 @@ function App(props) {
 
 
           <>
-            <BossSelection options={props.bossData.map((val, idx) => { return val })} waveData={props.waveData} ></BossSelection>
-            <BossHeader bossData={props.curMobData}></BossHeader>
-            <Info></Info>
+            <BossSelection></BossSelection>
+            <BossHeader2 bossData={props.curMobData}></BossHeader2>
+            {/* <BossHeader bossData={props.curMobData}></BossHeader>
+            <Info></Info> */}
             <UnitHeader></UnitHeader>
             <UnitSelection></UnitSelection>
           </>

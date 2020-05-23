@@ -256,6 +256,12 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
                 fixes: action.payload
             }
 
+        case GlobalActions.LOAD_UPDATES.SUCCESS || GlobalActions.LOAD_UPDATES.FAIL:
+            return {
+                ...state,
+                updates: action.payload
+            }
+
         default:
             return state
 

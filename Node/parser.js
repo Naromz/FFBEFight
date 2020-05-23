@@ -88,38 +88,17 @@ async function loadUnitFile() {
 
 		let curUnitData = Object.entries(arr[i])[1]["1"];
 		if (curUnitData.max_rarity == 7) {
-
-
-			let unitWikiPageData;
-			let url;
-			await axios.get('https://exvius.gamepedia.com/' + curUnitData.name).then(async (res) => {
-				const $ = cheerio.load(res.data);
-				if (res.data) {
-
-					url = $(`table.wikitable`).find('img').attr('src');
-
-
-					if (url) {
-						console.log(url);
-						await downloadImage(url, `./unitImgFull/${curUnitData.name}Full.png`)
-					}
-
-				}
-				unitDataArr.push({ name: curUnitData.name, stats: curUnitData.stats, moves: curUnitData.actives, passives: curUnitData.passives, magic: curUnitData.magics, fullImg: `${curUnitData.name}Full` });
-
-			}).catch(err => {
-
+			unitDataArr.push({
+				name: curUnitData.name, stats: curUnitData.stats, moves: curUnitData.actives, passives: curUnitData.passives, magic: curUnitData.magics, icon: `unit_icon_${curUnitData.id}.png`, fullImg: `unit_ills_${curUnitData.id}.png`
 			});
 
 		}
-
 	}
 
 	fs.writeFile('unitsparsed.yaml', yaml.dump({ units: unitDataArr }), (err) => { console.log(err) });
 }
 
 async function loadImgFile() {
-
 
 	let url;
 	let i = 0;
@@ -142,7 +121,7 @@ async function loadImgFile() {
 
 
 }
+loadUnitFile();
 
 
-
-loadImgFile();
+// loadImgFile();

@@ -78,6 +78,24 @@ function* getFixes(action) {
         });
     }
 }
+function* getUpdates(action) {
+    try {
+        const response = yield call(Axios.post, `${serverAddress()}/getUpdates`);
+        console.log(response.data);
+        yield put({
+            type: GlobalActions.LOAD_UPDATES.SUCCESS,
+            payload: response.data
+        })
+
+    } catch (e) {
+        yield put({
+            type: GlobalActions.LOAD_UPDATES.FAIL,
+            payload: {
+                Err: e.message
+            }
+        });
+    }
+}
 
 function* writeIssue(action) {
     console.log(action)
@@ -105,6 +123,8 @@ function* mySaga() {
     yield takeLatest(GlobalActions.LOAD_FIXES.START, getFixes);
 
     yield takeLatest(GlobalActions.WRITEISSUE.START, writeIssue);
+
+    yield takeLatest(GlobalActions.LOAD_UPDATES.START, getUpdates);
 
 
 }
