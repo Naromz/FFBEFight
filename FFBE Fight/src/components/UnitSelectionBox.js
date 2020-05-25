@@ -9,11 +9,12 @@ import globalReducers from '../reducers/globalReducers';
 import { serverAddress } from '../sources'
 
 var UnitData = styled.div`
-width:800px;
+width:1000px;
 height:64px;
 border:1px solid black;
 background-color:lightgray;
 display:flex;
+align-items:center;
 flex-wrap:wrap;
 flex-direction:column;
 `

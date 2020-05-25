@@ -191,7 +191,7 @@ function App(props) {
 
   useEffect(() => {
     setHp(100);
-  }, [props.bossData?.uid])
+  }, [props.bossData.uid])
   return (
     <BossHeader>
       <HoverDisp test={showRes}>

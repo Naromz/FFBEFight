@@ -13,7 +13,7 @@ import { parseMoves, parseConditions } from '../Services/loadData';
 
 
 var ManagementCont = styled.div`
-width:800px;
+width:1000px;
 height:35px;
 background-color:lightgrey;
 display:flex;

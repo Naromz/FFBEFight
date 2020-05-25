@@ -1,4 +1,3 @@
-var list = [];
 
 export default function getObject(theObject) {
   var result = null;
@@ -13,8 +12,8 @@ export default function getObject(theObject) {
   else {
     for (var prop in theObject) {
       console.log(prop + ': ' + theObject[prop]);
-      if (prop == 'id') {
-        if (theObject[prop] == 1) {
+      if (prop === 'id') {
+        if (theObject[prop] === 1) {
           return theObject;
         }
       }

@@ -34,7 +34,7 @@ align-items:center;
 `
 
 var ContainAllCont = styled.div`
-width:800px;
+width:1000px;
 
 display:flex;
 flex-wrap:wrap;

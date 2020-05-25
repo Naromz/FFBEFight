@@ -1,62 +1,71 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { startUpdatesLoad } from '../actions/globalActions'
 import styled from 'styled-components'
-
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell'
-import { makeStyles } from '@material-ui/core/styles';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableBody from '@material-ui/core/TableBody'
-
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 550,
     backgroundColor: 'white',
-    maxHeight: 500,
-    overflow: 'auto',
+    minHeight: 40,
+
+    overflow: 'scroll'
   },
   tableHead: {
-    backgroundColor: 'gray',
+    backgroundColor: 'lightGray',
     outline: '1px solid black',
     boxShadow: '0 1px 4px 0'
   },
   container: {
-    maxHeight: 640,
+    maxHeight: 250,
+    minHeight: 250,
   },
 });
 
 var TableCont = styled.div`
-width:900px;
-height:85%;
+width:780px;
 outline:1px solid black;
-display:flex;
-flex-flow:wrap;
 margin:auto;
 margin-Top:24px;
 background-color:lightgray; 
-height:450px;
-overflow: 'auto';
+max-height:250px;
 `
 
-function ConditionstoDivs({ arr }) {
+
+
+function ActionsToDivs({ arr, mob }) {
   return arr.map((val, idx) => {
     return (
-      <TableRow key={idx}>
-        <TableCell >{val.uid}</TableCell>
-        <TableCell >{val.name}</TableCell>
-        <TableCell>{val.trigger}</TableCell>
-        <TableCell >{val.moves}</TableCell>
-        {/* <TableCell>{val.triggered.toString()}</TableCell> */}
-      </TableRow>
-    )
-  });
+      <TabRow key={idx} val={val} mob={mob}></TabRow>
+    );
+  })
 }
 
-function Conditions(props) {
+function TabRow({ val }) {
+
+  return (
+    <TableRow>
+      <TableCell align="left">{val.note}</TableCell>
+    </TableRow>
+
+
+
+  )
+}
+
+
+function App(props) {
+
+  useEffect(() => {
+  }, [props.actions]);
 
   const classes = useStyles();
   return (
@@ -64,40 +73,39 @@ function Conditions(props) {
       <TableContainer className={classes.container}>
 
 
-        <Table stickyHeader className={classes.table} aria-label="simple table">
+        <Table className={classes.table} aria-label="simple table">
           <TableHead className={classes.tableHead}>
             <TableRow>
-              <TableCell>UID</TableCell>
-              <TableCell align="left">Caster</TableCell>
-              <TableCell align="left">Reason</TableCell>
-              <TableCell align="left">Moves</TableCell>
-              <TableCell align="left">Triggered</TableCell>
+              <TableCell align="left">Notes</TableCell>
             </TableRow>
 
           </TableHead>
           <TableBody>
-            <ConditionstoDivs key={'test'} arr={props.arr} />
+            {props.arr && <ActionsToDivs arr={props.arr} mob={props.mob} />}
           </TableBody>
         </Table>
       </TableContainer>
     </TableCont>
   );
+
+
 }
-//THIS FUNCTION MAPS STORE TO STATE
+
 const mapState = state => ({
-  result: state.globalReducer.result,
+  arr: state.globalReducer.curMob?.notes,
 });
 
 
 //THIS FUNCTION IS USED TO MAP ACTIONS TO FUNCTIONS
 const mapDispatch = dispatch => ({
+  loadFixes: () => dispatch(startUpdatesLoad())
 
 });
 
 export default connect(
   mapState,
   mapDispatch
-)(Conditions);
+)(App);
 
 
 

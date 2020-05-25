@@ -12,15 +12,32 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import ConditionList from '../components/ConditionList'
-
+import StatsBox from '../components/StatsBox'
+import NotesList from '../components/NotesList'
+import ControlsList from '../components/BossControls'
+import BossControls from '../components/BossControls';
 function LoadData({ sel, mobData }) {
 
-  if (sel === "cond") {
+  if (sel === 0) {
     return (
       <ConditionList></ConditionList>
     )
   }
-
+  if (sel === 1) {
+    return (
+      <StatsBox></StatsBox>
+    )
+  }
+  if (sel === 2) {
+    return (
+      <NotesList></NotesList>
+    )
+  }
+  if (sel === 3) {
+    return (
+      <BossControls></BossControls>
+    )
+  }
   return (
     <></>
   )
@@ -28,7 +45,7 @@ function LoadData({ sel, mobData }) {
 
 
 function App(props) {
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -57,10 +74,10 @@ function App(props) {
               <Tab label="Conds" />
               <Tab label="Stats" />
               <Tab label="Notes" />
-              <Tab label="Action" />
+              <Tab label="Controls" />
             </Tabs>
 
-            <LoadData sel={"cond"}></LoadData>
+            <LoadData sel={value}></LoadData>
           </Paper>
 
 
@@ -90,9 +107,9 @@ export default connect(
 
 
 var EnemyCont = styled.div`
-width:600px;
+width:800px;
 height:100%;
-outline:1px solid black;
+border:1px solid black;
 display:flex;
 justify-content:center;
 `
@@ -105,9 +122,9 @@ margin-top:3px;
 `
 
 var EnemyDataCont = styled.div`
-width:800px;
+width:1000px;
 height:350px;
-border:1px solid black;
+outline:1px solid black;
 display:flex;
 flex-direction:row;
 

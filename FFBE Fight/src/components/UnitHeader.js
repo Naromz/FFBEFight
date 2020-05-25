@@ -35,7 +35,7 @@ height:24px;
 `
 
 var UnitData = styled.div`
-width:800px;
+width:1000px;
 height:128px;
 border:1px solid black;
 background-color:lightgray;
@@ -54,7 +54,7 @@ justify-content:center;
 align-items:center;
 `
 var UnitStuffCont = styled.div`
-width:600px;
+width:800px;
 height:100%;
 display:flex;
 flex-flow:wrap;
@@ -70,7 +70,7 @@ flex-flow:wrap;
 outline:1px solid black;
 `
 var NameBox = styled.div`
-width:150px;
+width:250px;
 height:35px;
 outline:1px solid black;
 font-size:18px;

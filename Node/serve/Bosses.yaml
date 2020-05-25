@@ -49,12 +49,13 @@
           notes:
             - note: Reacts to physical and magical damage
             - note: Moves will spark chain with other calcas and brinas
-            - note: Needs to be debuffed every 4 turns otherwise it will do 2X Damage
+            - note: Needs to be debuffed every 4 turns 
             - note: 50% resistance to elementaless damage
           name: Calca 1
           race: [demon,fairy]
           img: Calca
           hp: 100
+          mp: 50000
           initalhp: 45000000
           atk: 1800
           def: 4600
@@ -260,12 +261,14 @@
           notes:
             - note: Reacts to physical and magical damage
             - note: Moves will spark chain with other calcas and brinas
-            - note: Needs to be debuffed every 4 turns otherwise it will do 2X Damage
+            - note: Needs to be debuffed every 4 turns 
             - note: 50% resistance to elementaless damage
           name: Brina 1
           race: [demon,fairy]
           img: Brina
           hp: 100
+          
+          mp: 50000
           initalhp: 45000000
           atk: 1800
           def: 4600
@@ -468,12 +471,14 @@
           notes:
             - note: Reacts to physical and magical damage
             - note: Moves will spark chain with other calcas and brinas
-            - note: Needs to be debuffed every 4 turns otherwise it will do 2X Damage
+            - note: Needs to be debuffed every 4 turns 
             - note: 50% resistance to elementaless damage
           name: Calca 2
           race: [demon,fairy]
           img: Calca
           hp: 100
+          
+          mp: 50000
           initalhp: 45000000
           atk: 1800
           def: 4600
@@ -681,12 +686,13 @@
           notes:
             - note: Reacts to physical and magical damage
             - note: Moves will spark chain with other calcas and brinas
-            - note: Needs to be debuffed every 4 turns otherwise it will do 2X Damage
+            - note: Needs to be debuffed every 4 turns 
             - note: 50% resistance to elementaless damage
           name: Brina 2
           race: [demon,fairy]
           img: Brina
           hp: 100
+          mp: 50000
           initalhp: 45000000
           atk: 1800
           def: 4600
@@ -893,12 +899,13 @@
           notes:
             - note: Reacts to physical and magical damage
             - note: Moves will spark chain with other calcas and brinas
-            - note: Needs to be debuffed every 4 turns otherwise it will do 2X Damage
+            - note: Needs to be debuffed every 4 turns 
             - note: 50% resistance to elementaless damage
           name: Calca 3
           race: [demon,fairy]
           img: Calca
           hp: 100
+          mp: 50000
           initalhp: 45000000
           atk: 1800
           def: 4600
@@ -1105,12 +1112,13 @@
           notes:
             - note: Reacts to physical and magical damage
             - note: Moves will spark chain with other calcas and brinas
-            - note: Needs to be debuffed every 4 turns otherwise it will do 2X Damage
+            - note: Needs to be debuffed every 4 turns 
             - note: 50% resistance to elementaless damage
           name: Brina 3
           race: [demon,fairy]
           img: Brina
           hp: 100
+          mp: 50000
           initalhp: 45000000
           atk: 1800
           def: 4600

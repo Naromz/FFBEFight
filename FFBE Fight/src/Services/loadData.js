@@ -106,11 +106,9 @@ export function checkCondition(uid, mobid) {
 
   let curState = store.getState();
   let curWave = curState.globalReducer.curWaveData;
-  let curMobData = curState.globalReducer.curMob;
+  let curMobData;
   let curActions = curState.globalReducer.curActions;
   let targeted = false;
-  console.log(curActions);
-
 
 
   if (mobid) {
@@ -118,10 +116,18 @@ export function checkCondition(uid, mobid) {
 
     for (mobIdx = 0; mobIdx < curWave.mobs.length; mobIdx++) {
 
+      if (curWave.mobs[mobIdx].uid == mobid) {
 
-      curMobData = curWave.mobs[mobIdx];
+        targeted = true;
+        curMobData = curWave.mobs[mobIdx];
+      }
     }
 
+
+  }
+
+  if (targeted == false) {
+    curMobData = curState.globalReducer.curMob;
   }
 
   let curConditions = curMobData.cond;
@@ -149,16 +155,12 @@ export function checkCondition(uid, mobid) {
         }
       }
       if (curConditions[i].trigger.type == 'magdmg') {
-        console.log('Cond Found ')
-
         let found = false;
         let actionIdx = 0;
         if (curActions) {
-          console.log(curActions[actionIdx]);
           for (actionIdx = 0; actionIdx < curActions.length; actionIdx++) {
-            if ((curActions[actionIdx].note == "magical" && curActions[actionIdx].tar == 'aoe')) {
+            if ((curActions[actionIdx].note == "magical" && curActions[actionIdx].tar == 'aoe') || (curActions[actionIdx].note == "magical" && curActions[actionIdx].tar == curMobData.name)) {
               conditionTrue = true;
-              console.log('triggered');
             }
           }
         }
@@ -168,7 +170,7 @@ export function checkCondition(uid, mobid) {
         let actionIdx = 0;
         if (curActions) {
           for (actionIdx = 0; actionIdx < curActions.length; actionIdx++) {
-            if ((curActions[actionIdx].note == "physical" && curActions[actionIdx].tar == 'aoe')) {
+            if ((curActions[actionIdx].note == "physical" && curActions[actionIdx].tar == 'aoe') || (curActions[actionIdx].note == "physical" && curActions[actionIdx].tar == curMobData.name)) {
               conditionTrue = true;
             }
           }
@@ -188,10 +190,17 @@ function findMove(moveid, mobid) {
 
   let mobIdx = 0;
   let mob;
-
+  let found = false;
   for (mobIdx = 0; mobIdx < curWave.mobs.length; mobIdx++) {
     // curWave.mobs[mobIdx].uid = mobid;
-    mob = curWave.mobs[mobIdx];
+
+    if (mobid == curWave.mobs[mobIdx].uid) {
+      mob = curWave.mobs[mobIdx];
+      found = true;
+    }
+  }
+  if (found == false) {
+    mob = curState.curMob;
   }
 
 
@@ -238,6 +247,7 @@ export function parseConditions() {
 
   let i = 0;
   let conditionList = [];
+
   for (i = 0; i < mobs.length; i++) {
 
 
@@ -251,7 +261,6 @@ export function parseConditions() {
       condition.moves = findMove(mobs[i].cond[cond].moves[0].uid, mobs[i].uid).name;
       condition.name = mobs[i].name;
       condition.desc = mobs[i].desc;
-      condition.triggered = checkCondition(mobs[i].cond[cond].uid, mobs[i].uid)
 
       conditionList.push(condition);
     }

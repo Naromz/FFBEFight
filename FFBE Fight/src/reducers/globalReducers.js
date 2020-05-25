@@ -13,7 +13,6 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
 
             }
         case GlobalActions.ALERT_MESSAGE:
-            alert(action.payload);
             return {
                 ...state
             }
@@ -24,8 +23,8 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
                 loading: true
             }
         case GlobalActions.LOADBOSSES.SUCCESS:
-            var loading = true;
-            if (state.loadArray.units == false) {
+            var loading;
+            if (state.loadArray.units === false) {
                 loading = false
             }
             return {
@@ -46,7 +45,7 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
 
         case GlobalActions.LOADUNITS.SUCCESS:
             var loading = true;
-            if (state.loadArray.bosses == false) {
+            if (state.loadArray.bosses === false) {
                 loading = false
             }
             return {
@@ -81,7 +80,7 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
         case GlobalActions.CHANGE_HP:
             let newWave = state.curWaveData.mobs.map((val) => {
 
-                if (val.uid == state.curMob.uid) {
+                if (val.uid === state.curMob.uid) {
                     val.hp = action.payload;
 
                 }
@@ -122,13 +121,12 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
             let curMoves = state.curTurn;
             let curTurn;
             var found = false;
-            var remove = false;
             if (curMoves.length > 0) {
                 curTurn = curMoves.map((val, idx) => {
                     curmove = val;
-                    if (val.spot == action.payload.spot) {
+                    if (val.spot === action.payload.spot) {
 
-                        if (val.data[0].name == action.payload.data[0].name) {
+                        if (val.data[0].name === action.payload.data[0].name) {
                             found = true;
                             curmove = { spot: val.spot, data: [{ name: 'empty', effects: 'none' }] };
                             return curmove;

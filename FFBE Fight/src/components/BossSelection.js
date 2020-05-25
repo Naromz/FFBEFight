@@ -1,37 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components'
 import { changeActiveBoss, changeActiveMob } from '../actions/globalActions';
 
-var NextButtonCont = styled.div`
-flex:1;
-height:64px;
-outline:1px solid black;
-text-align:center;
-background-color:white;
-display:flex;
-flex-wrap:wrap;
-flex-direction:row;
-justify-content:center;
-align-items:center;
-`
-var NextButton = styled.div`
-width:80px;
-height:32px;
-border:1px solid black;
-text-align:center;
-background-color:lightgray;
-vertical-align:middle;
-border-radius:2px;
-display:flex;
-flex-wrap:wrap;
-flex-direction:row;
-justify-content:center;
-align-items:center;
-`
-
 var BossHeader = styled.div`
-width:800px;
+width:1000px;
 height:64px;
 border:1px solid black;
 display:flex;
@@ -63,20 +36,12 @@ justify-content:center;
 align-items:center;
 border-radius:2px;
 `
-var SelectionInput = styled.select`
-width:85%;
-height:22px;
-`
 
 var BossIcon = styled.img`
 width:85%;
 height:85%;
 
 `
-var CreateSelection = ({ selections }) => {
-  return selections.map((val, idx) => <option value={val.uid} key={idx}>{val.name}</option>)
-}
-
 var CreateEnemies = ({ enemies, changeactiveMob }) => {
   return enemies.map((val, idx) => {
     return (

@@ -1,15 +1,13 @@
 
-import React, { Component, useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components'
 
-import history from '../history';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell'
 import { makeStyles } from '@material-ui/core/styles';
-import { parseMoves } from '../Services/loadData';
 import TableContainer from '@material-ui/core/TableContainer';
 
 

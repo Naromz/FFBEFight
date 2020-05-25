@@ -1,4 +1,4 @@
-import { delay, call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest } from 'redux-saga/effects'
 import { GlobalActions } from '../actions/globalActions';
 import { serverAddress } from '../sources'
 import Axios from 'axios';
