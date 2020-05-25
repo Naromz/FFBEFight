@@ -30,8 +30,8 @@ align-items:center;
 `
 
 var MoveImg = styled.img`
-width:24px;
-height:24px;
+width:36px;
+height:36px;
 `
 
 var UnitData = styled.div`
@@ -125,7 +125,7 @@ function GetUnitMoves({ unitData, setSelMove, setMoveData, uid }) {
     return unitData.map((val, idx) =>
 
       <MoveBoxCont onMouseMove={() => setSelMove(val.name)} onClick={() => { setMoveData(val, uid); UpdateActions() }} key={idx}>
-        <MoveImg key={idx} src={require(`../resources/images/Moves/${val.icon}`)} />
+        <MoveImg key={idx} src={serverAddress() + `/images/type/move/name/${val.icon}`} />
       </MoveBoxCont>);
   }
 };

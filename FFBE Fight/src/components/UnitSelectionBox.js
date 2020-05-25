@@ -181,14 +181,14 @@ align-items:center;
 
 `
 var MoveImg = styled.img`
-width:32px;
-height:32px;
+width:48px;
+height:48px;
 
 `
 var MiniMoveImg = styled.img`
 width:24px;
 height:24px;
-
+align-self:center;
 `
 var MoveNameDescCont = styled.div`
 width:600px;
@@ -281,7 +281,7 @@ function MoveBox(props) {
   }
 
   if (found) {
-    return <UnitSelMove>  <MiniMoveImg src={require(`../resources/images/Moves/${icon}`)} /></UnitSelMove>
+    return <UnitSelMove>  <MiniMoveImg src={serverAddress() + `/images/type/move/name/${icon}`} /></UnitSelMove>
   }
   else {
     return <UnitSelMove></UnitSelMove>
@@ -291,7 +291,7 @@ function MoveBox(props) {
 function GetUnitMoves({ unitData, setname, setdesc }) {
   return unitData.map((val, idx) =>
     <MoveBoxCont key={idx}>
-      <MoveImg key={idx} onMouseEnter={() => { setname(val.name); setdesc(val.effects.map((val, idx) => <> {val.desc} <br /></>)) }} src={require(`../resources/images/Moves/${val.icon}`)} />
+      <MoveImg key={idx} onMouseEnter={() => { setname(val.name); setdesc(val.effects.map((val, idx) => <> {val.desc} <br /></>)) }} src={serverAddress() + `/images/type/move/name/${val.icon}`} />
     </MoveBoxCont>);
 };
 
