@@ -68,7 +68,6 @@ app.post('/geteffects', async (req, res) => {
 });
 
 app.get('/images/type/:type/name/:name', async function (req, res) {
-  console.log(req.params);
 
   if (req.params.type === 'res') {
     res.sendFile(path.join(__dirname + `/serve/Images/Resistances/${req.params.name}.png`))
@@ -78,6 +77,9 @@ app.get('/images/type/:type/name/:name', async function (req, res) {
   }
   else if (req.params.type === 'unit') {
     res.sendFile(path.join(__dirname + `/serve/Images/Units/${req.params.name}`))
+  }
+  else if (req.params.type === 'move') {
+    res.sendFile(path.join(__dirname + `/serve/Images/Moves/${req.params.name}`))
   }
   else {
     res.send("error");
