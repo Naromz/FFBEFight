@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import BossHeader from '../components/BossHeader';
 import BossSelection from '../components/BossSelection';
 import Info from '../components/Info'
-import UnitHeader from '../components/UnitHeader';
+import UnitHeader from '../components/UnitHeader2';
 import UnitSelection from '../components/UnitSelectionBox';
 import loadStuff, { parseMoves } from '../Services/loadData';
 import globalReducers from '../reducers/globalReducers';

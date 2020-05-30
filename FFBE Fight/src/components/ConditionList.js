@@ -115,7 +115,7 @@ function TabRow({ val, mob }) {
                   {val.moves && val.moves.map((val2, idx) => {
 
                     return (
-                      <TableRow>
+                      <TableRow key={idx}>
 
                         <TableCell>{findMove(val2.uid, mob) && findMove(val2.uid, mob).name}</TableCell>
                         <TableCell>{findMove(val2.uid, mob) && findMove(val2.uid, mob).desc}</TableCell>
@@ -148,7 +148,7 @@ function TabRow({ val, mob }) {
 function App(props) {
 
   useEffect(() => {
-  }, [props.actions]);
+  }, [props.actions, props.curTurn]);
 
   const classes = useStyles();
   return (
@@ -183,6 +183,7 @@ const mapState = state => ({
   arr: state.globalReducer.curMob?.cond,
   mob: state.globalReducer.curMob,
   actions: state.globalReducer.curActions,
+  curTurn: state.globalReducer.curTurn,
 });
 
 

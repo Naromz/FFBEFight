@@ -1,6 +1,7 @@
 import store from '../store'
 import { loadBosses, changeActiveBoss, updateCurActions } from '../actions/globalActions'
 import Conditions from '../components/Conditions';
+import { v4 as uuidv4 } from 'uuid'
 
 
 export default function LoadStuff() {
@@ -25,7 +26,6 @@ function findUnitbyUID(UID) {
   }
   return unit;
 }
-
 function parseMove(move) {
   let state = { ...store.getState() };
   let curMobData = state.globalReducer.curMob;
@@ -34,10 +34,15 @@ function parseMove(move) {
     let newArr = [];
 
     for (let i = 0; i < move.data.length; i++) {
+
       move.data[i].effects.forEach(element => {
+
+        let action = {};
+
         if (element.effect?.multicast) {
+
           newArr.push({
-            note: 'Activate Multicast Skills', tar: 'NA', caster: findUnitbyUID(move.uid).unitData?.name, eff: 'Multicast', type: 'Multicast'
+            note: 'Activate Multicast Skills', key: uuidv4(), tar: 'NA', caster: findUnitbyUID(move.uid).unitData?.name, eff: 'Multicast', type: 'Multicast'
           })
 
         }
@@ -51,7 +56,7 @@ function parseMove(move) {
           for (imperil = 0; imperil < Object.entries(element.effect?.imperil).length; imperil++) {
             let [key, val] = Object.entries(element.effect?.imperil)[imperil];
             newArr.push({
-              note: key + " " + val, strength: val, tar: 'ENEMY', caster: findUnitbyUID(move.uid).unitData?.name, eff: 'Imperil', type: 'Imperil'
+              note: key + " " + val, key: uuidv4(), strength: val, tar: 'ENEMY', caster: findUnitbyUID(move.uid).unitData?.name, eff: 'Imperil', type: 'Imperil', turns: element.effect?.turns
             })
           }
 
@@ -62,19 +67,19 @@ function parseMove(move) {
         if (element.effect?.damage) {
           if (element.effect?.area == "ST") {
             if (element?.effect?.damage?.elements) {
-              newArr.push({ note: (element?.effect?.damage?.mecanism), strength: element?.effect?.damage?.coef, type: 'Damage', caster: findUnitbyUID(move.uid).unitData?.name, eff: 'ST Damage Elemental ' + element?.effect?.damage?.elements[0].charAt(0).toUpperCase() + element?.effect?.damage?.elements[0].slice(1), tar: curMobData?.name })
+              newArr.push({ note: (element?.effect?.damage?.mecanism), key: uuidv4(), strength: element?.effect?.damage?.coef, type: 'Damage', caster: findUnitbyUID(move.uid).unitData?.name, eff: 'ST Damage Elemental ' + element?.effect?.damage?.elements[0].charAt(0).toUpperCase() + element?.effect?.damage?.elements[0].slice(1), tar: curMobData?.name })
             }
             else {
-              newArr.push({ note: (element?.effect?.damage?.mecanism), strength: element?.effect?.damage?.coef, type: 'Damage', caster: findUnitbyUID(move.uid).unitData?.name, eff: 'ST Damage Non-Elemental', tar: curMobData?.name })
+              newArr.push({ note: (element?.effect?.damage?.mecanism), key: uuidv4(), strength: element?.effect?.damage?.coef, type: 'Damage', caster: findUnitbyUID(move.uid).unitData?.name, eff: 'ST Damage Non-Elemental', tar: curMobData?.name })
             }
 
           }
           if (element.effect?.area == "AOE") {
             if (element?.effect?.damage?.elements) {
-              newArr.push({ note: (element?.effect?.damage?.mecanism), strength: element?.effect?.damage?.coef, type: 'Damage', caster: findUnitbyUID(move?.uid).unitData?.name, eff: 'AOE Damage Elemental ' + element?.effect?.damage?.elements[0].charAt(0).toUpperCase() + element?.effect?.damage?.elements[0].slice(1), tar: 'aoe' })
+              newArr.push({ note: (element?.effect?.damage?.mecanism), key: uuidv4(), strength: element?.effect?.damage?.coef, type: 'Damage', caster: findUnitbyUID(move?.uid).unitData?.name, eff: 'AOE Damage Elemental ' + element?.effect?.damage?.elements[0].charAt(0).toUpperCase() + element?.effect?.damage?.elements[0].slice(1), tar: 'aoe' })
             }
             else {
-              newArr.push({ note: (element?.effect?.damage?.mecanism), strength: element?.effect?.damage?.coef, type: 'Damage', caster: findUnitbyUID(move?.uid).unitData?.name, eff: 'AOE Damage Non-Elemental', tar: 'aoe' })
+              newArr.push({ note: (element?.effect?.damage?.mecanism), key: uuidv4(), strength: element?.effect?.damage?.coef, type: 'Damage', caster: findUnitbyUID(move?.uid).unitData?.name, eff: 'AOE Damage Non-Elemental', tar: 'aoe' })
             }
 
           }
@@ -83,7 +88,7 @@ function parseMove(move) {
         //Handle Resist Effects
         if (element.effect?.resist) {
           if (element.effect?.area == "AOE") {
-            newArr.push({ note: (element?.effect?.resist[0].percent), strength: element?.effect?.resist[0].percent, caster: findUnitbyUID(move.uid).unitData?.name, type: 'Resistance Buff', eff: 'AOE Resistance ' + element?.effect?.resist[0].name.charAt(0).toUpperCase() + element?.effect?.resist[0].name.slice(1), tar: 'Allies', turns: element?.effect?.turns })
+            newArr.push({ note: (element?.effect?.resist[0].percent), key: uuidv4(), strength: element?.effect?.resist[0].percent, caster: findUnitbyUID(move.uid).unitData?.name, type: 'Resistance Buff', eff: 'AOE Resistance ' + element?.effect?.resist[0].name.charAt(0).toUpperCase() + element?.effect?.resist[0].name.slice(1), tar: 'Allies', turns: element?.effect?.turns })
           }
           else {
             //newArr.push({ caster: findUnitbyUID(move.uid, props.selUnits).unitData?.name, eff: 'ST Damage Non-Elemental', tar: props.curMobData?.name })
@@ -183,6 +188,29 @@ export function checkCondition(uid, mobid) {
   return conditionTrue;
 };
 
+export function CalcPhysicalDamage(UnitAtk, EnemyDef, Level, Modifier, EnemyBreak, EnemyBuff, Multipliers, DefIgnore, WeaponVariance) {
+
+  var EnemyMod;
+  EnemyMod = (EnemyDef * (100 - (EnemyBreak - EnemyBuff) / 100) * ((100 - DefIgnore) / 100))
+  var TotalDamage;
+  var LevelCorrection = (1 + (Level / 100));
+  TotalDamage = (UnitAtk * UnitAtk) / EnemyMod;
+  TotalDamage = TotalDamage * LevelCorrection;
+  TotalDamage = TotalDamage * Multipliers;
+  TotalDamage = TotalDamage * .925;
+  TotalDamage = TotalDamage * 1.25;
+  TotalDamage = TotalDamage * Modifier;
+  TotalDamage = TotalDamage * 100;
+
+
+  return TotalDamage;
+
+
+
+
+}
+
+
 
 function findMove(moveid, mobid) {
   let curState = { ...store.getState() };
@@ -220,6 +248,9 @@ function findMove(moveid, mobid) {
 
 }
 
+function returnUnitStats() {
+
+}
 
 export function parseMoves() {
   let state = { ...store.getState() };

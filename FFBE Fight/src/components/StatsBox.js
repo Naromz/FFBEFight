@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { alertMessage, sagaStart, modifyCurTurn } from '../actions/globalActions'
 import styled from 'styled-components'
@@ -115,10 +115,71 @@ function Icon({ element, ailment, bossData }) {
 
 }
 
+function testStats(bossData, Actions, oldActions) {
+  if (Actions && bossData && oldActions) {
+    var stats = bossData;
+    let allfects = [];
+    let actionIdx = 0;
+    for (actionIdx = 0; actionIdx < Actions.length; actionIdx++) {
+      let moveIdx = 0;
+      let moves = [];
+      if (Actions[actionIdx]) {
+        moves = Actions[actionIdx].data;
+        for (moveIdx = 0; moveIdx < moves.length; moveIdx++) {
+          let effectIdx = 0;
+          let effects = moves[moveIdx].effects;
+          for (effectIdx = 0; effectIdx < effects.length; effectIdx++) {
+            let effect = effects[effectIdx].effect;
+
+            if (effect.cooldownSkill) {
+              let cooldownSkill = effect.cooldownSkill.effects;
+              let coolDownIdx = 0;
+              for (coolDownIdx = 0; coolDownIdx < cooldownSkill.length; coolDownIdx++) {
+                if (cooldownSkill[coolDownIdx]?.effect?.area == "ST") {
+
+                  allfects.push({ ...cooldownSkill[coolDownIdx].effect, mob: bossData.uid });
+                }
+                else {
+                  allfects.push({ ...cooldownSkill[coolDownIdx].effect });
+                }
+              }
+            }
+            if (effects[effectIdx].effect.area == "ST") {
+
+              allfects.push({ ...effects[effectIdx].effect, mob: bossData.uid });
+            }
+            else {
+
+              allfects.push({ ...effects[effectIdx].effect });
+            }
+
+          }
+        }
+      }
+    }
+    var allAffects = allfects.concat(oldActions)
+
+    var imperils = [];
+    allAffects.forEach((val) => {
+      if (val.imperil) {
+        imperils.push({ type: Object.entries(val.imperil)[0][0], val: Object.entries(val.imperil)[0][1] });
+      }
+    })
+    console.log(imperils);
+
+  }
+
+}
 function App(props) {
   var [move, setMove] = useState();
   var [selMove, setSelMove] = useState();
   const classes = useStyles();
+  useEffect((val, idx) => {
+    testStats(props.bossData, props.curTurn, props.oldTurnEffects);
+  }, [props.bossData, props.curTurn, props.oldTurnEffects])
+
+  var test = props.bossData;
+
 
   return (
     <>
@@ -128,12 +189,12 @@ function App(props) {
       <div className={classes.bar}>
 
         <div className={classes.statBar}>
-          <StatBox><StatText>HP</StatText><StatText>{numeral(props.bossData?.hp / 100 * props.bossData?.initalhp).format('0,0')}</StatText></StatBox>
-          <StatBox><StatText>MP</StatText><StatText>{numeral(props.bossData.mp).format('0,0')}</StatText></StatBox>
-          <StatBox><StatText>ATK</StatText><StatText>{props.bossData.atk}</StatText></StatBox>
-          <StatBox><StatText>DEF</StatText><StatText>{props.bossData.def}</StatText></StatBox>
-          <StatBox><StatText>SPR</StatText><StatText>{props.bossData.spr}</StatText></StatBox>
-          <StatBox><StatText>MAG</StatText><StatText>{props.bossData.mag}</StatText></StatBox>
+          <StatBox><StatText>HP</StatText><StatText>{numeral(test?.hp / 100 * test?.initalhp).format('0,0')}</StatText></StatBox>
+          <StatBox><StatText>MP</StatText><StatText>{numeral(test.mp).format('0,0')}</StatText></StatBox>
+          <StatBox><StatText>ATK</StatText><StatText>{test.atk}</StatText></StatBox>
+          <StatBox><StatText>DEF</StatText><StatText>{test.def}</StatText></StatBox>
+          <StatBox><StatText>SPR</StatText><StatText>{test.spr}</StatText></StatBox>
+          <StatBox><StatText>MAG</StatText><StatText>{test.mag}</StatText></StatBox>
         </div>
 
       </div>
@@ -143,15 +204,15 @@ function App(props) {
       <div className={classes.bar}>
 
         <div className={classes.statBar}>
-          <Icon bossData={props.bossData} ailment="blind" />
-          <Icon bossData={props.bossData} ailment="confusion" />
-          <Icon bossData={props.bossData} ailment="disease" />
+          <Icon bossData={test} ailment="blind" />
+          <Icon bossData={test} ailment="confusion" />
+          <Icon bossData={test} ailment="disease" />
 
-          <Icon bossData={props.bossData} ailment="silence" />
-          <Icon bossData={props.bossData} ailment="paralysis" />
-          <Icon bossData={props.bossData} ailment="poison" />
-          <Icon bossData={props.bossData} ailment="petrification" />
-          <Icon bossData={props.bossData} ailment="sleep" />
+          <Icon bossData={test} ailment="silence" />
+          <Icon bossData={test} ailment="paralysis" />
+          <Icon bossData={test} ailment="poison" />
+          <Icon bossData={test} ailment="petrification" />
+          <Icon bossData={test} ailment="sleep" />
 
         </div>
 
@@ -162,15 +223,15 @@ function App(props) {
       <div className={classes.bar}>
 
         <div className={classes.statBar}>
-          <Icon bossData={props.bossData} element="ice" />
-          <Icon bossData={props.bossData} element="fire" />
-          <Icon bossData={props.bossData} element="wind" />
-          <Icon bossData={props.bossData} element="earth" />
-          <Icon bossData={props.bossData} element="water" />
-          <Icon bossData={props.bossData} element="lightning" />
-          <Icon bossData={props.bossData} element="dark" />
-          <Icon bossData={props.bossData} element="light" />
-          <Icon bossData={props.bossData} element="nonelemental" />
+          <Icon bossData={test} element="ice" />
+          <Icon bossData={test} element="fire" />
+          <Icon bossData={test} element="wind" />
+          <Icon bossData={test} element="earth" />
+          <Icon bossData={test} element="water" />
+          <Icon bossData={test} element="lightning" />
+          <Icon bossData={test} element="dark" />
+          <Icon bossData={test} element="light" />
+          <Icon bossData={test} element="nonelemental" />
         </div>
 
       </div>
@@ -183,6 +244,8 @@ function App(props) {
 const mapState = state => ({
   result: state.globalReducer.result,
   bossData: state.globalReducer.curMob,
+  curTurn: state.globalReducer.curTurn,
+  oldTurnEffects: state.globalReducer.oldTurnEffects,
 });
 
 

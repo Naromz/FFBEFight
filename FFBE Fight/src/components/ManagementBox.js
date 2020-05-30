@@ -8,7 +8,7 @@ import history from '../history';
 import Actions from './Actions'
 import Conditions from './Conditions'
 import FightControls from './FightControls'
-import { parseMoves, parseConditions } from '../Services/loadData';
+import { parseMoves, parseConditions, UpdateActions } from '../Services/loadData';
 
 
 
@@ -75,7 +75,7 @@ function ManagementBox(props) {
 
       </HoverDisp>
       <Btn onClick={() => props.nextTurn()}>Next Turn</Btn>
-      <Btn onClick={() => { setShowProp('block'); setSelScreen('actions') }}>Team Actions</Btn>
+      <Btn onClick={() => { setShowProp('block'); setSelScreen('actions'); UpdateActions() }}>Team Actions</Btn>
       <Btn onClick={() => { setShowProp('block'); setSelScreen('conditions') }}>Conditions</Btn>
       <Btn onClick={() => { setShowProp('block'); setSelScreen('thresholds') }}>Thresholds</Btn>
       {/* <Btn onClick={() => { setShowProp('block'); setSelScreen('controls') }}>Fight Controls</Btn> */}

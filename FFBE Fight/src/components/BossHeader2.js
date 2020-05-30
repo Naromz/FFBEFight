@@ -16,7 +16,7 @@ import StatsBox from '../components/StatsBox'
 import NotesList from '../components/NotesList'
 import ControlsList from '../components/BossControls'
 import BossControls from '../components/BossControls';
-function LoadData({ sel, mobData }) {
+function LoadData({ sel, mobData, curTurn }) {
 
   if (sel === 0) {
     return (
@@ -77,7 +77,7 @@ function App(props) {
               <Tab label="Controls" />
             </Tabs>
 
-            <LoadData sel={value}></LoadData>
+            <LoadData sel={value} ></LoadData>
           </Paper>
 
 
@@ -91,6 +91,7 @@ function App(props) {
 //THIS FUNCTION MAPS STORE TO STATE
 const mapState = state => ({
   mobData: state.globalReducer.curMob,
+  curTurn: state.globalReducer.curTurn,
 });
 
 

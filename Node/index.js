@@ -81,6 +81,12 @@ app.get('/images/type/:type/name/:name', async function (req, res) {
   else if (req.params.type === 'move') {
     res.sendFile(path.join(__dirname + `/serve/Images/Items/${req.params.name}`))
   }
+  else if (req.params.type === 'item') {
+    res.sendFile(path.join(__dirname + `/serve/Images/Items/${req.params.name}`))
+  }
+  else if (req.params.type === 'misc') {
+    res.sendFile(path.join(__dirname + `/serve/Images/Misc/${req.params.name}.png`))
+  }
   else {
     res.send("error");
   }

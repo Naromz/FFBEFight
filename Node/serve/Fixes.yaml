@@ -3,55 +3,55 @@
   priority: High
   assignedto: Zach
   startdate: xxx
-  perco: 45
+  perco: 85
 - id: 4db0d362
   name: Need to redesign and redo ui
   priority: Medium
   assignedto: Zach
-  perco: 0
-  startdate: xxx
+  perco: 55
+  startdate: 5/24
 - id: b77c4252
   name: Test all units etc.
   priority: Medium
   assignedto: Zach
-  perco: 0
+  perco: 85
   startdate: xxx
 - id: b94bd6a5
   name: Redesign root system to include other info
   priority: Medium
   startdate: xxx
-  perco: 0
+  perco: 55
   assignedto: Zach
 - id: ca2ed035
   name: Finsih Equipment Code 
   priority: Low
-  perco: 0
+  perco: 25
   assignedto: Zach
   startdate: xxx
 - id: 5552c046
   name: Add more utility functionality
   priority: Low
   assignedto: Zach
-  perco: 0
+  perco: 25
   startdate: xxx
 - id: 2642fa74
   name: Add small images to show unit selection
   priority: Medium
   assignedto: Zach
-  startdate: xxx
-  perco: 0
+  startdate: 5/24
+  perco: 100
 - id: cf9384c4
   name: Add images to backend instead of front end
   priority: Medium
   assignedto: Zach
-  startdate: xxx
-  perco: 0
+  startdate: 5/24
+  perco: 100
 - id: d58d9855
   name: Rewrite boss header
   priority: Medium
   assignedto: Zach
-  startdate: 5/21/2020
-  perco: 0
+  startdate: 5/24/2020
+  perco: 100
 - id: 4ce83792
   name: Create Dev Server and etc
   priority: XXX

@@ -47,12 +47,12 @@
       mobs: 
         - uid: dba953a7
           notes:
-            - note: Reacts to physical and magical damage
+            - note: Will Counter Physical Attacks and Magical Attacks
             - note: Moves will spark chain with other calcas and brinas
             - note: Needs to be debuffed every 4 turns 
-            - note: 50% resistance to elementaless damage
+            - note: 50% resistance to non-elemental damage
           name: Calca 1
-          race: [demon,fairy]
+          race: [demon,spirit]
           img: Calca
           hp: 100
           mp: 50000
@@ -62,39 +62,26 @@
           mag: 2200
           spr: 2800
           cond:
-            - uid: 025ad2a5
+            - uid: 0289167b
               trigger: {type: turn, repeat: 4}
               cond: Every 4 Turns
               desc: Fullbuff 1 ally 200%
               moves: [{uid: cc4f3cea, percent: 100}]
-            - uid: 771d7a55
+            - uid: fe05ababa
               trigger: {type: physdmg}
               cond: Trigger on Phy Dmg
-              desc: ST Physical Damage 2.3X
+              desc: ST Physical Damage 2.3X (Max 2) 
               moves: [{uid: 6a9f1e8c, percent: 100}]
-            - uid: 216bc790
+            - uid: fa350937
               cond: Trigger on Mag Dmg
-              desc: ST Magical Damage 2.3X
+              desc: ST Magical Damage 2.3X (Max 2) 
               trigger: {type: magdmg}
               moves: [{uid: dab4827f, percent: 100}]
-
-            - uid: 75a15d16
+            - uid: 1d309a0b
               trigger: {type: turn, repeat: 1}
-              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25}]
-              cond: Standard Attack
-              desc: ST Damage, Debuff
-
-            - uid: 0e51f9e2
-              trigger: {type: turn, repeatstring: '2n-1'}
-              desc: ST Physical Damage 2.3X 
-              cond: Every Odd Turn
-              moves: [{uid: 7afb78b6, percent: 50}]
-            - uid: 1137b223
-              desc: ST ATK/MAG Debuff, ST Mag Dmg 4.0x
-              cond: Every Even Turn
-              trigger: {type: turn, repeatstring: '2n'}
-              moves: [{uid: bafd5ce1, percent: 50}]
-
+              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25},{uid: bafd5ce1, percent: 50},{uid: 7afb78b6, percent: 50}]
+              cond: Standard Attack 
+              desc: ST Damage, Debuff, Ailments (4 moves)
           moves:
             - uid: 7afb78b6
               name: Bite
@@ -157,7 +144,7 @@
 
             - uid: bafd5ce1
               name: Cursed Dance
-              desc: Magical Damage 5X to one Enemy, Reduce ATK/MAG 25% for 3 turns to one enemy
+              desc: Inflict silence, paralyze, and petrify (100%) to one enemy.
               effects:
                 - effect:
                     ailment:
@@ -259,12 +246,12 @@
             petrification: 100
         - uid: 658fbafc
           notes:
-            - note: Reacts to physical and magical damage
+            - note: Will Counter Physical Attacks and Magical Attacks
             - note: Moves will spark chain with other calcas and brinas
             - note: Needs to be debuffed every 4 turns 
-            - note: 50% resistance to elementaless damage
+            - note: 50% resistance to non-elemental damage
           name: Brina 1
-          race: [demon,fairy]
+          race: [demon,spirit]
           img: Brina
           hp: 100
           
@@ -283,28 +270,19 @@
             - uid: fe05abab
               trigger: {type: physdmg}
               cond: Trigger on Phy Dmg
-              desc: ST Physical Damage 2.3X
+              desc: ST Physical Damage 2.3X (Max 2)
               moves: [{uid: 6a9f1e8c, percent: 100}]
             - uid: fa350937
               cond: Trigger on Mag Dmg
-              desc: ST Magical Damage 2.3X
+              desc: ST Magical Damage 2.3X (Max 2)
               trigger: {type: magdmg}
               moves: [{uid: dab4827f, percent: 100}]
             - uid: 1d309a0b
               trigger: {type: turn, repeat: 1}
-              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25}]
+              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25},{uid: bafd5ce1, percent: 50},{uid: 7afb78b6, percent: 50}]
               cond: Standard Attack
-              desc: ST Damage, Debuff
-            - uid: 741d9576
-              trigger: {type: turn, repeatstring: '2n-1'}
-              desc: ST Physical Damage 2.3X 
-              cond: Every Odd Turn
-              moves: [{uid: 7afb78b6, percent: 50}]
-            - uid: d93d1845
-              desc: ST ATK/MAG Debuff, ST Mag Dmg 4.0x
-              cond: Every Even Turn
-              trigger: {type: turn, repeatstring: '2n'}
-              moves: [{uid: bafd5ce1, percent: 50}]
+              desc: ST Damage, Debuff, Ailments (4 moves)
+              
           moves:
             - uid: 7afb78b6
               name: Bite
@@ -367,7 +345,7 @@
 
             - uid: bafd5ce1
               name: Cursed Dance
-              desc: Magical Damage 5X to one Enemy, Reduce ATK/MAG 25% for 3 turns to one enemy
+              desc: Inflict silence, paralyze, and petrify (100%) to one enemy.
               effects:
                 - effect:
                     ailment:
@@ -469,12 +447,12 @@
             petrification: 100
         - uid: f1a3efd9
           notes:
-            - note: Reacts to physical and magical damage
+            - note: Will Counter Physical Attacks and Magical Attacks
             - note: Moves will spark chain with other calcas and brinas
             - note: Needs to be debuffed every 4 turns 
-            - note: 50% resistance to elementaless damage
+            - note: 50% resistance to non-elemental damage
           name: Calca 2
-          race: [demon,fairy]
+          race: [demon,spirit]
           img: Calca
           hp: 100
           
@@ -485,41 +463,26 @@
           mag: 2200
           spr: 2800
           cond:
-            - uid: 4c785d48
+            - uid: 0289167b
               trigger: {type: turn, repeat: 4}
-              
               cond: Every 4 Turns
               desc: Fullbuff 1 ally 200%
               moves: [{uid: cc4f3cea, percent: 100}]
-            - uid: be014e7e
+            - uid: fe05abab
               trigger: {type: physdmg}
               cond: Trigger on Phy Dmg
-              desc: ST Physical Damage 2.3X
+              desc: ST Physical Damage 2.3X (Max 2)
               moves: [{uid: 6a9f1e8c, percent: 100}]
-            - uid: ca2993b1
-              trigger: {type: magdmg}
-              
+            - uid: fa350937
               cond: Trigger on Mag Dmg
-              desc: ST Magical Damage 2.3X
+              desc: ST Magical Damage 2.3X (Max 2)
+              trigger: {type: magdmg}
               moves: [{uid: dab4827f, percent: 100}]
-            - uid: 06c41af5
+            - uid: 1d309a0b
               trigger: {type: turn, repeat: 1}
-              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25}]
-              
+              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25},{uid: bafd5ce1, percent: 50},{uid: 7afb78b6, percent: 50}]
               cond: Standard Attack
-              desc: ST Damage, Debuff
-            - uid: e7db82be
-              trigger: {type: turn, repeatstring: '2n-1'}
-              desc: ST Physical Damage 2.3X 
-              cond: Every Odd Turn
-              moves: [{uid: 7afb78b6, percent: 50}]
-            - uid: 27b9f333
-              trigger: {type: turn, repeatstring: '2n'}
-              
-              desc: ST ATK/MAG Debuff, ST Mag Dmg 4.0x
-              cond: Every Even Turn
-              moves: [{uid: bafd5ce1, percent: 50}]
-
+              desc: ST Damage, Debuff, Ailments (4 moves)
           moves:
             - uid: 7afb78b6
               name: Bite
@@ -582,7 +545,7 @@
 
             - uid: bafd5ce1
               name: Cursed Dance
-              desc: Magical Damage 5X to one Enemy, Reduce ATK/MAG 25% for 3 turns to one enemy
+              desc: Inflict silence, paralyze, and petrify (100%) to one enemy.
               effects:
                 - effect:
                     ailment:
@@ -684,12 +647,12 @@
             petrification: 100
         - uid: 1f96396d
           notes:
-            - note: Reacts to physical and magical damage
+            - note: Will Counter Physical Attacks and Magical Attacks
             - note: Moves will spark chain with other calcas and brinas
             - note: Needs to be debuffed every 4 turns 
-            - note: 50% resistance to elementaless damage
+            - note: 50% resistance to non-elemental damage
           name: Brina 2
-          race: [demon,fairy]
+          race: [demon,spirit]
           img: Brina
           hp: 100
           mp: 50000
@@ -699,40 +662,26 @@
           mag: 2200
           spr: 2800
           cond:
-            - uid: f8904e30
+            - uid: 0289167b
               trigger: {type: turn, repeat: 4}
-              
               cond: Every 4 Turns
               desc: Fullbuff 1 ally 200%
               moves: [{uid: cc4f3cea, percent: 100}]
-            - uid: 25b65d86
+            - uid: fe05abab
               trigger: {type: physdmg}
-              
               cond: Trigger on Phy Dmg
-              desc: ST Physical Damage 2.3X
+              desc: ST Physical Damage 2.3X (Max 2)
               moves: [{uid: 6a9f1e8c, percent: 100}]
-            - uid: cb999c04
-              trigger: {type: magdmg}
-              
+            - uid: fa350937
               cond: Trigger on Mag Dmg
-              desc: ST Magical Damage 2.3X
+              desc: ST Magical Damage 2.3X (Max 2)
+              trigger: {type: magdmg}
               moves: [{uid: dab4827f, percent: 100}]
-            - uid: 986359d1
+            - uid: 1d309a0b
               trigger: {type: turn, repeat: 1}
-              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25}]
+              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25},{uid: bafd5ce1, percent: 50},{uid: 7afb78b6, percent: 50}]
               cond: Standard Attack
-              desc: ST Damage, Debuff
-            - uid: 4cff64a5
-              trigger: {type: turn, repeatstring: '2n-1'}
-              desc: ST Physical Damage 2.3X 
-              cond: Every Odd Turn
-              moves: [{uid: 7afb78b6, percent: 50}]
-            - uid: 2324c3ca
-              trigger: {type: turn, repeatstring: '2n'}
-              desc: ST ATK/MAG Debuff, ST Mag Dmg 4.0x
-              cond: Every Even Turn
-              moves: [{uid: bafd5ce1, percent: 50}]
-
+              desc: ST Damage, Debuff, Ailments (4 moves)
           moves:
             - uid: 7afb78b6
               name: Bite
@@ -795,7 +744,7 @@
 
             - uid: bafd5ce1
               name: Cursed Dance
-              desc: Magical Damage 5X to one Enemy, Reduce ATK/MAG 25% for 3 turns to one enemy
+              desc: Inflict silence, paralyze, and petrify (100%) to one enemy.
               effects:
                 - effect:
                     ailment:
@@ -897,12 +846,12 @@
             petrification: 100
         - uid: 6b543891
           notes:
-            - note: Reacts to physical and magical damage
+            - note: Will Counter Physical Attacks and Magical Attacks
             - note: Moves will spark chain with other calcas and brinas
             - note: Needs to be debuffed every 4 turns 
-            - note: 50% resistance to elementaless damage
+            - note: 50% resistance to non-elemental damage
           name: Calca 3
-          race: [demon,fairy]
+          race: [demon,spirit]
           img: Calca
           hp: 100
           mp: 50000
@@ -912,40 +861,26 @@
           mag: 2200
           spr: 2800
           cond:
-            - uid: 524caad8
+            - uid: 0289167b
               trigger: {type: turn, repeat: 4}
-              
               cond: Every 4 Turns
               desc: Fullbuff 1 ally 200%
               moves: [{uid: cc4f3cea, percent: 100}]
-            - uid: 70378f90
+            - uid: fe05abab
               trigger: {type: physdmg}
-              
               cond: Trigger on Phy Dmg
-              desc: ST Physical Damage 2.3X
+              desc: ST Physical Damage 2.3X (Max 2)
               moves: [{uid: 6a9f1e8c, percent: 100}]
-            - uid: 21dca56f
-              trigger: {type: magdmg}
-              
+            - uid: fa350937
               cond: Trigger on Mag Dmg
-              desc: ST Magical Damage 2.3X
+              desc: ST Magical Damage 2.3X (Max 2)
+              trigger: {type: magdmg}
               moves: [{uid: dab4827f, percent: 100}]
-            - uid: a9eb7cd5
+            - uid: 1d309a0b
               trigger: {type: turn, repeat: 1}
-              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25}]
+              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25},{uid: bafd5ce1, percent: 50},{uid: 7afb78b6, percent: 50}]
               cond: Standard Attack
-              desc: ST Damage, Debuff
-            - uid: ad92160f
-              trigger: {type: turn, repeatstring: '2n-1'}
-              desc: ST Physical Damage 2.3X 
-              cond: Every Odd Turn
-              moves: [{uid: 7afb78b6, percent: 50}]
-            - uid: f6b58227
-              trigger: {type: turn, repeatstring: '2n'}
-              desc: ST ATK/MAG Debuff, ST Mag Dmg 4.0x
-              cond: Every Even Turn
-              moves: [{uid: bafd5ce1, percent: 50}]
-
+              desc: ST Damage, Debuff, Ailments (4 moves)
           moves:
             - uid: 7afb78b6
               name: Bite
@@ -1008,7 +943,7 @@
 
             - uid: bafd5ce1
               name: Cursed Dance
-              desc: Magical Damage 5X to one Enemy, Reduce ATK/MAG 25% for 3 turns to one enemy
+              desc: Inflict silence, paralyze, and petrify (100%) to one enemy.
               effects:
                 - effect:
                     ailment:
@@ -1110,12 +1045,12 @@
             petrification: 100
         - uid: 9e2dff7a
           notes:
-            - note: Reacts to physical and magical damage
+            - note: Will Counter Physical Attacks and Magical Attacks
             - note: Moves will spark chain with other calcas and brinas
             - note: Needs to be debuffed every 4 turns 
-            - note: 50% resistance to elementaless damage
+            - note: 50% resistance to non-elemental damage
           name: Brina 3
-          race: [demon,fairy]
+          race: [demon,spirit]
           img: Brina
           hp: 100
           mp: 50000
@@ -1125,39 +1060,26 @@
           mag: 2200
           spr: 2800
           cond:
-            - uid: 4aba53b6
+            - uid: 0289167b
               trigger: {type: turn, repeat: 4}
-              
               cond: Every 4 Turns
               desc: Fullbuff 1 ally 200%
               moves: [{uid: cc4f3cea, percent: 100}]
-            - uid: bbf1875f
+            - uid: fe05abab
               trigger: {type: physdmg}
               cond: Trigger on Phy Dmg
-              desc: ST Physical Damage 2.3X
+              desc: ST Physical Damage 2.3X (Max 2)
               moves: [{uid: 6a9f1e8c, percent: 100}]
-            - uid: efd3c6ea
-              trigger: {type: magdmg}
-              
+            - uid: fa350937
               cond: Trigger on Mag Dmg
-              desc: ST Magical Damage 2.3X
+              desc: ST Magical Damage 2.3X (Max 2)
+              trigger: {type: magdmg}
               moves: [{uid: dab4827f, percent: 100}]
-            - uid: 5b66e353
+            - uid: 1d309a0b
               trigger: {type: turn, repeat: 1}
-              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25}]
+              moves: [{uid: 111b1760, percent: 25},{uid: 83fd2994, percent: 25},{uid: bafd5ce1, percent: 50},{uid: 7afb78b6, percent: 50}]
               cond: Standard Attack
-              desc: ST Damage, Debuff
-            - uid: f180d8a7
-              trigger: {type: turn, repeatstring: '2n-1'}
-              desc: ST Physical Damage 2.3X 
-              cond: Every Odd Turn
-              moves: [{uid: 7afb78b6, percent: 50}]
-            - uid: 27178dbc
-              trigger: {type: turn, repeatstring: '2n'}
-              desc: ST ATK/MAG Debuff, ST Mag Dmg 4.0x
-              cond: Every Even Turn
-              moves: [{uid: bafd5ce1, percent: 50}]
-
+              desc: ST Damage, Debuff, Ailments (4 moves)
           moves:
             - uid: 7afb78b6
               name: Bite
@@ -1220,7 +1142,7 @@
 
             - uid: bafd5ce1
               name: Cursed Dance
-              desc: Magical Damage 5X to one Enemy, Reduce ATK/MAG 25% for 3 turns to one enemy
+              desc: Inflict silence, paralyze, and petrify (100%) to one enemy.
               effects:
                 - effect:
                     ailment:

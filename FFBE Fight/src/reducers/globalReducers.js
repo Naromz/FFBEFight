@@ -1,7 +1,7 @@
 import { GlobalActions } from '../actions/globalActions'
 
 
-export default (state = { loading: true, loadArray: { units: true, bosses: true }, turnNum: 1, curTurn: [], selUnitData: [], selunitplace: 0, turnData: [] }, action) => {
+export default (state = { oldTurnEffects: [], loading: true, loadArray: { units: true, bosses: true }, turnNum: 1, curTurn: [], selUnitData: [], selunitplace: 0, turnData: [] }, action) => {
 
 
     switch (action.type) {
@@ -113,6 +113,38 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
 
             }
 
+
+        case GlobalActions.LOAD_EQUIP.SUCCESS:
+            {
+                var equipData = action.payload.units[0];
+                var found = false;
+                var curEquip
+                if (state.curEquip) {
+                    curEquip = state.curEquip.map((val, idx) => {
+                        if (val.spot == state.selunitplace) {
+                            return { spot: val.spot, data: equipData };
+                            found = true;
+                        }
+                        else {
+                            return val;
+                        }
+                    });
+                    if (!found) {
+                        curEquip.push({ spot: state.selunitplace, data: equipData })
+                    }
+                }
+                else {
+                    curEquip = [{ spot: state.selunitplace, data: equipData }];
+                }
+
+
+                return {
+                    ...state,
+                    curEquip
+                }
+
+
+            }
 
 
         case GlobalActions.MODIFY_TURN_MOVES:
@@ -234,11 +266,70 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
                 selunitplace: action.payload
             }
         case GlobalActions.NEXT_TURN:
+            let Actions = [];
+            let i = 0;
+            for (i = 0; i < state.curTurn.length; i++) {
+                let moveIdx = 0;
+                for (moveIdx = 0; moveIdx < state.curTurn[i].data.length; moveIdx++) {
+                    let turnEff = state.curTurn[i].data[moveIdx].effects;
+                    let effects = [];
+                    let effectIdx = 0;
+                    for (effectIdx = 0; effectIdx < turnEff.length; effectIdx++) {
+
+                        if (turnEff[effectIdx].effect.cooldownSkill) {
+                            let cooldownSkill = turnEff[effectIdx].effect.cooldownSkill.effects;
+                            let coolDownIdx = 0;
+                            for (coolDownIdx = 0; coolDownIdx < cooldownSkill.length; coolDownIdx++) {
+                                if (cooldownSkill[coolDownIdx].effect.turns) {
+                                    console.log(cooldownSkill[coolDownIdx]);
+                                    if (cooldownSkill[coolDownIdx]?.effect?.area == "ST") {
+
+                                        Actions.push({ ...cooldownSkill[coolDownIdx].effect, mob: state.curMob.uid, spot: state.curTurn[i].spot });
+                                    }
+                                    else {
+
+                                        Actions.push({ ...cooldownSkill[coolDownIdx].effect, spot: state.curTurn[i].spot });
+                                    }
+                                }
+
+                            }
+                        }
+
+                        if (turnEff[effectIdx].effect.turns) {
+
+                            if (turnEff[effectIdx].effect?.area == "ST") {
+
+                                Actions.push({ ...turnEff[effectIdx].effect, mob: state.curMob.uid, spot: state.curTurn[i].spot });
+                            }
+                            else {
+
+                                Actions.push({ ...turnEff[effectIdx].effect, spot: state.curTurn[i].spot });
+                            }
+
+                        }
+
+
+                    }
+                }
+
+
+            }
+
+            let lastActions = state.oldTurnEffects;
+            lastActions.forEach((val) => {
+                if (val.turns > 1) {
+                    Actions.push({ ...val, turns: val.turns - 1 })
+                }
+            });
+
             return {
                 ...state,
                 turnNum: state.turnNum + 1,
                 turnData: state.turnData.concat([{ turn: state.turnNum + 1, alliesData: state.curTurn, bossData: null }]),
-                curTurn: []
+                curTurn: [],
+                curActions: [],
+                oldTurnEffects: Actions
+
 
             }
 
@@ -259,6 +350,7 @@ export default (state = { loading: true, loadArray: { units: true, bosses: true 
                 ...state,
                 updates: action.payload
             }
+
 
         default:
             return state

@@ -98,7 +98,6 @@ function* getUpdates(action) {
 }
 
 function* writeIssue(action) {
-    console.log(action)
     try {
         const response = yield call(() => Axios.post(`${serverAddress()}/writeIssue?name=${action.payload.name}&desc=${action.payload.desc}`))
         yield put({
@@ -109,6 +108,25 @@ function* writeIssue(action) {
     } catch (e) {
         yield put({
             type: GlobalActions.WRITEISSUE.FAIL,
+            payload: {
+                Err: e.message
+            }
+        });
+    }
+}
+
+function* loadEquip(action) {
+    try {
+        let link = `https://firebasestorage.googleapis.com/v0/b/ffbeequip.appspot.com/o/PartyBuilds%2F${action.payload.link}.json?alt=media`
+        const response = yield call(() => Axios.get(link))
+        yield put({
+            type: GlobalActions.LOAD_EQUIP.SUCCESS,
+            payload: response.data
+        })
+
+    } catch (e) {
+        yield put({
+            type: GlobalActions.LOAD_EQUIP.FAIL,
             payload: {
                 Err: e.message
             }
@@ -126,6 +144,7 @@ function* mySaga() {
 
     yield takeLatest(GlobalActions.LOAD_UPDATES.START, getUpdates);
 
+    yield takeLatest(GlobalActions.LOAD_EQUIP.START, loadEquip);
 
 }
 

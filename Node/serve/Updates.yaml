@@ -6,3 +6,7 @@
   desc: Fixed the GL exclusive moves
   fixnum: none
   compdate: 5/18
+- update: 5/18
+  desc: Rewrote base app once again, boss header massive overflow. Started Inventory.
+  fixnum: d58d9855, 4ce83792, 8518f1b2, ca2ed035
+  compdate: 5/25
