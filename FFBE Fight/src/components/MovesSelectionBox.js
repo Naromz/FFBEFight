@@ -57,9 +57,14 @@ function LoadMoveArr({ data, pos }) {
     }
   }
   return moves.map((val, idx) => {
-    return (
-      <img key={idx} style={{ border: '1px solid black', borderRadius: '4px', width: '48px', height: '48px' }} src={serverAddress() + `/images/type/move/name/${val.icon}`} />
-    )
+    if (val.icon) {
+
+
+      return (
+
+        <img key={idx} style={{ border: '1px solid black', borderRadius: '4px', width: '48px', height: '48px' }} src={serverAddress() + `/images/type/move/name/${val.icon}`} />
+      )
+    }
   })
 
 }

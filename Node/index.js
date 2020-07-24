@@ -11,36 +11,36 @@ const path = require('path');
 var cors = require('cors')
 
 
-const connection = mysql.createConnection({
-  host: '104.248.49.169',
-  user: 'Zachary',
-  password: 'MickSucks1994',
-  database: 'FfbeFight',
-  connectTimeout: 30000
-});
+// const connection = mysql.createConnection({
+//   host: '104.248.49.169',
+//   user: 'Zachary',
+//   password: 'MickSucks1994',
+//   database: 'FfbeFight',
+//   connectTimeout: 30000
+// });
 
 
 app.use(cors())
 
-function writeSqlIssue(msg) {
+// function writeSqlIssue(msg) {
 
-  return new Promise((resolve, reject) => {
-    connection.query(
-      `INSERT INTO Issues (User,Reddit,Description) VALUES ( ?, ?, ?);`, [msg.name, 1, msg.desc],
-      function (err, results) {
-        if (err) {
-          reject(err);
-        } else {
-          if (results) {
-            resolve('Connected');
-          }
+//   return new Promise((resolve, reject) => {
+//     connection.query(
+//       `INSERT INTO Issues (User,Reddit,Description) VALUES ( ?, ?, ?);`, [msg.name, 1, msg.desc],
+//       function (err, results) {
+//         if (err) {
+//           reject(err);
+//         } else {
+//           if (results) {
+//             resolve('Connected');
+//           }
 
-        }
-      });
+//         }
+//       });
 
 
-  });
-}
+//   });
+// }
 
 app.post('/writeIssue', async (req, res) => {
   writeSqlIssue(req.query);

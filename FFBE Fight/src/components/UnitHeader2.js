@@ -8,6 +8,7 @@ import { UpdateActions } from '../Services/loadData'
 import { serverAddress } from '../sources'
 import EquipWindow from './EquipWindow'
 import MovesSelectionBox from './MovesSelectionBox'
+import UnitStatsBox from './UnitStatsBox';
 
 var UnitHeader = styled.div`
 width:100%;
@@ -118,6 +119,13 @@ function ReturnSelCont({ cont }) {
     return (
       <MovesSelectionBox></MovesSelectionBox>
     )
+
+  }
+  if (cont === 'stats') {
+    return (
+      <UnitStatsBox></UnitStatsBox>
+    )
+
   }
   return <> </>
 }

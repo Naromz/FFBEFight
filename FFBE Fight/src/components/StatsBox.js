@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, isValidElement } from 'react';
 import { connect } from 'react-redux';
 import { alertMessage, sagaStart, modifyCurTurn } from '../actions/globalActions'
 import styled from 'styled-components'
@@ -93,13 +93,17 @@ function jsUcfirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function Icon({ element, ailment, bossData }) {
+function Icon({ element, ailment, bossData, modStats }) {
+  if (!modStats) {
+    modStats = 0;
+  }
   const classes = useStyles();
   if (element) {
     return (
       <div className={classes.test}>
         <ImgIcon src={require(`../resources/images/${jsUcfirst(element)}.png`)} />
-        <TextBox>  {bossData.elementalResistances[element]}</TextBox>
+
+        <TextBox>  {bossData.elementalResistances[element] + modStats}</TextBox>
 
       </div>
     )
@@ -116,6 +120,7 @@ function Icon({ element, ailment, bossData }) {
 }
 
 function testStats(bossData, Actions, oldActions) {
+  var newBossData = Object.assign({}, bossData);
   if (Actions && bossData && oldActions) {
     var stats = bossData;
     let allfects = [];
@@ -144,29 +149,59 @@ function testStats(bossData, Actions, oldActions) {
                 }
               }
             }
-            if (effects[effectIdx].effect.area == "ST") {
-
-              allfects.push({ ...effects[effectIdx].effect, mob: bossData.uid });
-            }
             else {
+              if (effects[effectIdx].effect.area == "ST") {
 
-              allfects.push({ ...effects[effectIdx].effect });
+                allfects.push({ ...effects[effectIdx].effect, mob: bossData.uid });
+              }
+              else {
+
+                allfects.push({ ...effects[effectIdx].effect });
+              }
             }
-
           }
         }
       }
     }
     var allAffects = allfects.concat(oldActions)
-
     var imperils = [];
-    allAffects.forEach((val) => {
-      if (val.imperil) {
-        imperils.push({ type: Object.entries(val.imperil)[0][0], val: Object.entries(val.imperil)[0][1] });
-      }
-    })
-    console.log(imperils);
+    var elementTypes = { fire: 0, water: 0, ice: 0, lightning: 0, wind: 0, earth: 0, dark: 0, light: 0, nonelemental: 0 };
 
+    allAffects.forEach((val) => {
+      if (val.area == "AOE") {
+        if (val.imperil) {
+          imperils.push({ type: Object.entries(val.imperil)[0][0], val: Object.entries(val.imperil)[0][1] });
+        }
+      }
+      if (val.area == "ST") {
+        if (val.mob == newBossData.uid) {
+          if (val.imperil) {
+            imperils.push({ type: Object.entries(val.imperil)[0][0], val: Object.entries(val.imperil)[0][1] });
+          }
+        }
+      }
+
+
+    })
+
+    Object.entries(elementTypes).forEach((val) => {
+
+      let imperilIdx = 0;
+      let imperilVal = 0;
+
+      for (imperilIdx = 0; imperilIdx < imperils.length; imperilIdx++) {
+        if (imperils[imperilIdx].type == val[0]) {
+          if (imperilVal < imperils[imperilIdx].val) {
+            imperilVal = imperils[imperilIdx].val;
+          }
+        }
+      }
+
+
+      elementTypes[val[0]] = elementTypes[val[0]] - imperilVal;
+
+    })
+    return ({ elements: elementTypes });
   }
 
 }
@@ -223,14 +258,14 @@ function App(props) {
       <div className={classes.bar}>
 
         <div className={classes.statBar}>
-          <Icon bossData={test} element="ice" />
-          <Icon bossData={test} element="fire" />
-          <Icon bossData={test} element="wind" />
-          <Icon bossData={test} element="earth" />
-          <Icon bossData={test} element="water" />
-          <Icon bossData={test} element="lightning" />
-          <Icon bossData={test} element="dark" />
-          <Icon bossData={test} element="light" />
+          <Icon bossData={test} element="ice" modStats={testStats(props.bossData, props.curTurn, props.oldTurnEffects).elements.ice} />
+          <Icon bossData={test} element="fire" modStats={testStats(props.bossData, props.curTurn, props.oldTurnEffects).elements.fire} />
+          <Icon bossData={test} element="wind" modStats={testStats(props.bossData, props.curTurn, props.oldTurnEffects).elements.wind} />
+          <Icon bossData={test} element="earth" modStats={testStats(props.bossData, props.curTurn, props.oldTurnEffects).elements.earth} />
+          <Icon bossData={test} element="water" modStats={testStats(props.bossData, props.curTurn, props.oldTurnEffects).elements.water} />
+          <Icon bossData={test} element="lightning" modStats={testStats(props.bossData, props.curTurn, props.oldTurnEffects).elements.lightning} />
+          <Icon bossData={test} element="dark" modStats={testStats(props.bossData, props.curTurn, props.oldTurnEffects).elements.dark} />
+          <Icon bossData={test} element="light" modStats={testStats(props.bossData, props.curTurn, props.oldTurnEffects).elements.light} />
           <Icon bossData={test} element="nonelemental" />
         </div>
 

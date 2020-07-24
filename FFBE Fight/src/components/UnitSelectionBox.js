@@ -267,7 +267,7 @@ function CheckUnitData(data, pos) {
 
 function MoveBox(props) {
   let found = false;
-  let icon = '';
+  let icon;
   if (props.turnData.length) {
     let i = 0;
 
@@ -280,14 +280,23 @@ function MoveBox(props) {
     }
   }
 
+
   if (found) {
-    return <UnitSelMove>  <MiniMoveImg src={serverAddress() + `/images/type/move/name/${icon}`} /></UnitSelMove>
+    if (icon) {
+
+      return <UnitSelMove>  <MiniMoveImg src={serverAddress() + `/images/type/move/name/${icon}`} /></UnitSelMove>
+    }
+    else {
+
+      return <UnitSelMove></UnitSelMove>
+    }
   }
   else {
     return <UnitSelMove></UnitSelMove>
   }
 
 }
+
 function GetUnitMoves({ unitData, setname, setdesc }) {
   return unitData.map((val, idx) =>
     <MoveBoxCont key={idx}>

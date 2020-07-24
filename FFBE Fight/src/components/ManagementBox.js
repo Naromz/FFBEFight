@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { nextTurn } from '../actions/globalActions'
 import history from '../history';
 import Actions from './Actions'
-import Conditions from './Conditions'
+// import Conditions from './Conditions'
 import FightControls from './FightControls'
 import { parseMoves, parseConditions, UpdateActions } from '../Services/loadData';
 
@@ -69,7 +69,7 @@ function ManagementBox(props) {
       <HoverDisp onClick={() => setShowProp('none')} test={showProp}>
         {selScreen == 'actions' && <Actions arr={parseMoves()} />}
 
-        {selScreen == 'conditions' && <Conditions arr={parseConditions()} />}
+        {/* {selScreen == 'conditions' && <Conditions arr={parseConditions()} />} */}
 
         {selScreen == 'controls' && <FightControls />}
 
