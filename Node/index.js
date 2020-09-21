@@ -11,14 +11,6 @@ const path = require('path');
 var cors = require('cors')
 
 
-// const connection = mysql.createConnection({
-//   host: '104.248.49.169',
-//   user: 'Zachary',
-//   password: 'MickSucks1994',
-//   database: 'FfbeFight',
-//   connectTimeout: 30000
-// });
-
 
 app.use(cors())
 
